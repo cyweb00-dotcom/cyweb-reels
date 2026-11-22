@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --blue:#0064F0; }
+  html,body { margin:0; padding:0; background:#000; }
+  #stage { position:relative; width:1080px; height:1920px; overflow:hidden; background:#000;
+    font-family:"Inter","Helvetica Neue",Arial,sans-serif; color:#fff; letter-spacing:-0.02em; }
+  .blob { position:absolute; border-radius:50%; filter:blur(150px); }
+  .layer { position:absolute; left:0; top:0; width:1080px; height:1920px; }
+  .c { position:absolute; left:0; width:1080px; text-align:center; margin:0; white-space:nowrap; }
+  .h1 { font-weight:300; font-size:112px; line-height:1.02; letter-spacing:-0.035em; }
+  .h2 { font-weight:300; font-size:88px; line-height:1.04; letter-spacing:-0.03em; }
+  .glass { background:linear-gradient(180deg,rgba(255,255,255,0.20),rgba(255,255,255,0.05));
+    border:1.5px solid rgba(255,255,255,0.26); box-shadow:0 30px 80px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.3);
+    backdrop-filter:blur(30px); -webkit-backdrop-filter:blur(30px); }
+  .side div { height:86px; border-radius:24px; margin-bottom:18px; font-size:34px; display:flex; align-items:center; padding-left:32px; color:rgba(255,255,255,0.75); }
+  .kpi { border-radius:36px; padding:34px; height:250px; }
+  .bar { position:absolute; bottom:34px; width:20px; border-radius:12px; background:linear-gradient(180deg,#3D8BFF,#0064F0); }
+  .feat { position:absolute; width:400px; height:360px; border-radius:48px; padding:44px; box-sizing:border-box; }
+  .feat .ico { width:96px; height:96px; border-radius:30px; background:linear-gradient(135deg,#0064F0,#0A2A6B); margin-bottom:40px; }
+  .feat .t { font-size:56px; font-weight:400; }
+  .feat .s { font-size:34px; font-weight:300; color:rgba(255,255,255,0.65); margin-top:14px; }
+  .row { display:flex; align-items:center; font-size:58px; font-weight:400; padding:34px 44px; border-radius:36px; margin-bottom:26px; }
+  .check { width:58px; height:58px; border-radius:50%; background:var(--blue); display:inline-flex; align-items:center; justify-content:center; margin-right:30px; flex:none; }
+  .ba { position:absolute; left:90px; top:620px; width:900px; height:900px; border-radius:56px; overflow:hidden; background:linear-gradient(170deg,#1B1F2E,#0B0E18); }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="blob" id="b1" style="width:950px;height:950px;background:radial-gradient(circle,#0064F0 0%,rgba(0,100,240,0) 70%);"></div>
+  <div class="blob" id="b2" style="width:720px;height:720px;background:radial-gradient(circle,#3D8BFF 0%,rgba(61,139,255,0) 70%);opacity:0.4;"></div>
+  <div class="blob" id="b3" style="width:820px;height:820px;background:radial-gradient(circle,#0A2A6B 0%,rgba(10,42,107,0) 70%);opacity:0.9;"></div>
+
+  <!-- 1 hook -->
+  <div class="layer" id="sA">
+    <p class="c h1" id="a1" style="top:820px;">Running a business</p>
+    <p class="c h1" id="a2" style="top:960px;">is busy enough.</p>
+  </div>
+
+  <!-- 2 dashboard -->
+  <div class="layer" id="sB">
+    <p class="c h2" id="b_t" style="top:200px;font-size:66px;">Your business, one dashboard.</p>
+    <div class="glass" id="dash" style="position:absolute;left:70px;top:420px;width:940px;height:1180px;border-radius:56px;padding:40px;box-sizing:border-box;">
+      <div style="display:flex;gap:30px;height:100%;">
+        <div class="side" style="width:220px;">
+          <div style="background:rgba(0,100,240,0.35);color:#fff;">Overview</div>
+          <div>Website</div><div>Photos</div><div>Videos</div><div>Contact</div>
+        </div>
+        <div style="flex:1;">
+          <div style="display:flex;gap:24px;">
+            <div class="glass kpi" style="flex:1;" id="k1"><div style="font-size:30px;color:rgba(255,255,255,0.6);">Calls</div><div style="position:absolute;left:34px;right:34px;bottom:0;height:150px;" id="bars1"></div></div>
+            <div class="glass kpi" style="flex:1;" id="k2"><div style="font-size:30px;color:rgba(255,255,255,0.6);">Visits</div><div style="position:absolute;left:34px;right:34px;bottom:0;height:150px;" id="bars2"></div></div>
+          </div>
+          <div class="glass" id="panel" style="margin-top:24px;border-radius:40px;height:620px;padding:36px;box-sizing:border-box;">
+            <div style="font-size:34px;color:rgba(255,255,255,0.6);">Live site</div>
+            <div style="margin-top:30px;font-size:64px;font-weight:300;line-height:1.1;">Fixed right,<br>first time.</div>
+            <div style="margin-top:44px;display:flex;gap:20px;">
+              <span style="background:#fff;color:#000;border-radius:999px;padding:24px 40px;font-size:40px;font-weight:500;white-space:nowrap;">Call now</span>
+              <span class="glass" style="border-radius:999px;padding:24px 40px;font-size:40px;white-space:nowrap;">WhatsApp us</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 feature tiles -->
+  <div class="layer" id="sC">
+    <p class="c h2" id="c_t" style="top:200px;">Everything in one place.</p>
+    <div class="feat glass" id="f1" style="left:90px;top:460px;"><div class="ico"></div><div class="t">Website</div><div class="s">Live in days</div></div>
+    <div class="feat glass" id="f2" style="left:590px;top:560px;"><div class="ico"></div><div class="t">Photos</div><div class="s">Your work, shown</div></div>
+    <div class="feat glass" id="f3" style="left:90px;top:900px;"><div class="ico"></div><div class="t">Videos</div><div class="s">Short and clear</div></div>
+    <div class="feat glass" id="f4" style="left:590px;top:1000px;"><div class="ico"></div><div class="t">Contact</div><div class="s">One tap to call</div></div>
+    <div id="click" style="position:absolute;left:0;top:0;width:0;height:0;">
+      <svg width="64" height="72" viewBox="0 0 24 28" style="filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));"><path d="M2 1 L2 22 L7.5 17 L11 25 L14 23.6 L10.6 16.2 L18 16.2 Z" fill="#fff" stroke="#000" stroke-width="1"/></svg>
+    </div>
+  </div>
+
+  <!-- 4 checklist + toggle -->
+  <div class="layer" id="sD">
+    <p class="c h2" id="d_t" style="top:260px;">Update once. It is live.</p>
+    <div class="glass" id="toggle" style="position:absolute;left:340px;top:520px;width:400px;height:200px;border-radius:999px;">
+      <div id="knob" style="position:absolute;left:14px;top:14px;width:172px;height:172px;border-radius:50%;background:#fff;"></div>
+    </div>
+    <div style="position:absolute;left:150px;top:900px;width:780px;">
+      <div class="row glass" id="r1"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Site live</div>
+      <div class="row glass" id="r2"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Photos added</div>
+      <div class="row glass" id="r3"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Call button on</div>
+      <div class="row glass" id="r4"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Ready to be found</div>
+    </div>
+  </div>
+
+  <!-- 5 before / after -->
+  <div class="layer" id="sE">
+    <p class="c h2" id="e_t" style="top:260px;">Before and after.</p>
+    <div class="ba" id="before" style="filter:blur(10px);opacity:0.55;">
+      <div style="padding:70px;font-size:70px;font-weight:300;color:rgba(255,255,255,0.5);">Old page.<br>Hard to use.</div>
+    </div>
+    <div class="ba" id="after" style="clip-path:inset(0 0 0 50%);background:linear-gradient(170deg,#101828,#050814);">
+      <div style="padding:70px;font-size:70px;font-weight:300;line-height:1.05;">Clear page.<br>Easy to act on.</div>
+      <div style="position:absolute;left:70px;top:460px;display:flex;gap:20px;">
+        <span style="background:#fff;color:#000;border-radius:999px;padding:26px 46px;font-size:44px;font-weight:500;white-space:nowrap;">Call now</span>
+      </div>
+    </div>
+    <div id="wipe" style="position:absolute;left:540px;top:620px;width:4px;height:900px;background:rgba(255,255,255,0.8);"></div>
+  </div>
+
+  <!-- 6 tagline + lockup -->
+  <div class="layer" id="sF">
+    <p class="c h1" id="f_a" style="top:760px;font-size:96px;">Websites that help</p>
+    <p class="c h1" id="f_b" style="top:900px;font-size:96px;color:var(--blue);">local businesses grow.</p>
+  </div>
+
+  <!-- 7 end card -->
+  <div class="layer" id="sG">
+    <div id="endLogo" style="position:absolute;left:300px;top:600px;width:480px;"><img src="cyweb-logo.png" style="width:480px;display:block;"></div>
+    <p class="c h2" id="g_t" style="top:1140px;">Start with a message.</p>
+    <p class="c" id="g_u" style="top:1270px;font-size:58px;font-weight:400;">cywebdev.com</p>
+    <p class="c" id="g_c" style="top:1350px;font-size:40px;font-weight:300;color:rgba(255,255,255,0.65);">CYWEB team</p>
+  </div>
+
+  <div id="wm" style="position:absolute;right:60px;bottom:70px;width:150px;"><img src="cyweb-logo.png" style="width:150px;opacity:0.7;display:block;"></div>
+  <div id="fade" style="position:absolute;left:0;top:0;width:1080px;height:1920px;background:#000;opacity:0;"></div>
+</div>
+
+<script>
+  const E = (x) => 1 - Math.pow(1 - Math.min(Math.max(x,0),1), 3);
+  const EI = (x) => { x = Math.min(Math.max(x,0),1); return x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; };
+  const P = (t,a,b) => (t-a)/(b-a);
+  const $ = (id) => document.getElementById(id);
+  const set = (el,o) => { if (!el) return; for (const k in o) el.style[k] = o[k]; };
+
+  const SEG = { sA:[0,3.0], sB:[3.0,7.0], sC:[7.0,11.0], sD:[11.0,15.0], sE:[15.0,19.0], sF:[19.0,22.0], sG:[22.0,25.0] };
+
+  // build the two bar charts once
+  const heights1 = [40,62,48,80,56,96,72], heights2 = [55,35,70,50,85,62,94];
+  [['bars1',heights1],['bars2',heights2]].forEach(([id,hs]) => {
+    hs.forEach((h,i) => { const d=document.createElement('div'); d.className='bar'; d.dataset.h=h; d.style.left=(i*30)+"px"; d.style.width="20px"; $(id).appendChild(d); });
+  });
+
+  function fadeScene(id, a, b, T) {
+    const inP = E(P(T,a,a+0.5));
+    const outP = (T > b-0.4) ? EI(P(T,b-0.4,b)) : 0;
+    const alpha = Math.max(0, Math.min(1,inP)*(1-outP));
+    const blur = (1-Math.min(1,inP))*18 + outP*18;
+    set($(id), { opacity:alpha, filter: blur>0.2 ? `blur(${blur.toFixed(1)}px)` : 'none' });
+    $(id).style.display = (T >= a-0.3 && T <= b+0.3) ? '' : 'none';
+  }
+
+  function render(T) {
+    set($('b1'), { left:(120+80*Math.cos(T*0.35))+'px', top:(420+60*Math.sin(T*0.6))+'px', opacity:0.55+0.25*Math.sin(T*0.5) });
+    set($('b2'), { left:(560+70*Math.sin(T*0.42))+'px', top:(1100+90*Math.cos(T*0.3))+'px', opacity:0.35+0.2*Math.cos(T*0.6) });
+    set($('b3'), { left:(200+60*Math.sin(T*0.25))+'px', top:(1300+70*Math.sin(T*0.5))+'px' });
+    for (const k of Object.keys(SEG)) fadeScene(k, SEG[k][0], SEG[k][1], T);
+
+    // 1 hook
+    const a1 = E(P(T,0.2,0.9)), a2 = E(P(T,1.0,1.7));
+    set($('a1'), { opacity:a1, transform:`translateY(${(1-a1)*40}px)` });
+    set($('a2'), { opacity:a2, transform:`translateY(${(1-a2)*40}px)` });
+
+    // 2 dashboard
+    const bt = E(P(T,3.2,3.7)); set($('b_t'), { opacity:bt, transform:`translateY(${(1-bt)*30}px)` });
+    const dp = E(P(T,3.4,4.3)); set($('dash'), { opacity:dp, transform:`translateY(${(1-dp)*80}px) scale(${0.95+0.05*dp})`, filter:`blur(${(1-dp)*12}px)` });
+    document.querySelectorAll('#bars1 .bar, #bars2 .bar').forEach((b,i) => {
+      const p = E(P(T,4.0+ (i%7)*0.05, 4.8+(i%7)*0.05));
+      set(b, { height: (parseInt(b.dataset.h)*p)+'px' });
+    });
+    const pn = E(P(T,4.6,5.2)); set($('panel'), { opacity:pn, transform:`translateY(${(1-pn)*30}px)` });
+
+    // 3 feature tiles
+    const ct = E(P(T,7.2,7.7)); set($('c_t'), { opacity:ct, transform:`translateY(${(1-ct)*30}px)` });
+    [['f1',7.4,-80,0],['f2',7.7,80,0],['f3',8.1,-80,0],['f4',8.4,80,0]].forEach(([id,s,dx,dy]) => {
+      const p = E(P(T,s,s+0.6));
+      set($(id), { opacity:p, transform:`translate(${dx*(1-p)}px,${dy*(1-p)}px) scale(${0.92+0.08*p})`, filter:`blur(${(1-p)*10}px)` });
+    });
+    // click at each tile, one per tile
+    const cp = [[7.8,240,700],[8.2,800,800],[8.6,240,1200],[9.0,800,1300]];
+    let cx=240, cy=700, cop=0;
+    cp.forEach(([s,x,y]) => { const p=P(T,s-0.4,s); if (p>=0 && p<=1) { cx=x; cy=y; cop=1; } });
+    const cur = E(P(T,7.5,9.0));
+    set($('click'), { left:(cx+ (1-cur)*0)+'px', top:cy+'px', opacity: T<9.4 ? cop : 0 });
+
+    // 4 toggle + checklist
+    const dt = E(P(T,11.2,11.7)); set($('d_t'), { opacity:dt, transform:`translateY(${(1-dt)*30}px)` });
+    const tg = E(P(T,11.8,12.3));
+    set($('knob'), { left:(14 + 172*tg)+'px', background: tg>0.5 ? '#fff' : '#fff' });
+    set($('toggle'), { background: `rgba(${Math.round(255*(1-tg))},${Math.round(255*(1-tg)+100*tg)},${Math.round(255*(1-tg)+240*tg)},${0.12+0.5*tg})` });
+    ['r1','r2','r3','r4'].forEach((id,i) => {
+      const s = 12.5 + i*0.4; const p = E(P(T,s,s+0.4));
+      set($(id), { opacity:p, transform:`translateX(${(1-p)*80}px)` });
+    });
+
+    // 5 before / after wipe
+    const et = E(P(T,15.2,15.7)); set($('e_t'), { opacity:et, transform:`translateY(${(1-et)*30}px)` });
+    const wp = E(P(T,16.0,17.2));
+    set($('after'), { clipPath: `inset(0 0 0 ${50 - 50*wp}%)` });
+    set($('wipe'), { left: (540 - 540*wp + 540*0)+'px', opacity: T<17.4 ? 1 : 0 });
+    set($('before'), { filter:`blur(${10*(1-wp)}px)`, opacity: 0.55 });
+
+    // 6 tagline
+    const fa = E(P(T,19.2,19.7)), fb = E(P(T,19.8,20.4));
+    set($('f_a'), { opacity:fa, transform:`translateY(${(1-fa)*30}px)` });
+    set($('f_b'), { opacity:fb, transform:`translateY(${(1-fb)*30}px)` });
+
+    // 7 end card
+    const el = E(P(T,22.2,22.9)); set($('endLogo'), { opacity:el, transform:`scale(${0.9+0.1*el})` });
+    const gt = E(P(T,22.5,23.0)); set($('g_t'), { opacity:gt, transform:`translateY(${(1-gt)*30}px)` });
+    set($('g_u'), { opacity:E(P(T,22.8,23.2)) });
+    set($('g_c'), { opacity:E(P(T,23.0,23.4)) });
+
+    set($('wm'), { opacity: T > 22.2 ? 0 : 1 });
+    set($('fade'), { opacity: EI(P(T,24.0,25.0)) });
+  }
+
+  window.__render = render;
+  render(0);
+</script>
+</body>
+</html>
