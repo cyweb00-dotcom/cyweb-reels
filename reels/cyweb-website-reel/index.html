@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root { --blue: #2F7BFF; --blue-deep: #0B2A6B; }
+  html, body { margin: 0; padding: 0; background: #000; }
+  #stage {
+    position: relative; width: 1080px; height: 1920px; overflow: hidden;
+    background: #000; font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: #fff; letter-spacing: -0.02em;
+  }
+  .blob { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.85; }
+  .layer { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+  .center { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .h1 { font-weight: 300; font-size: 118px; line-height: 1.02; letter-spacing: -0.035em; margin: 0; }
+  .h2 { font-weight: 300; font-size: 96px; line-height: 1.04; letter-spacing: -0.03em; margin: 0; }
+  .glass {
+    background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.06));
+    border: 1.5px solid rgba(255,255,255,0.28);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.35);
+    backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+  }
+  .pill { border-radius: 999px; }
+  .chip { position: absolute; padding: 30px 46px; border-radius: 999px; font-size: 54px; font-weight: 400; white-space: nowrap; }
+  .sweep { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+  .card3d { position: absolute; width: 860px; height: 1240px; left: 110px; top: 340px; border-radius: 56px; overflow: hidden; background: linear-gradient(170deg, #1B1F2E 0%, #0B0E18 100%); }
+  .btn { display: inline-block; white-space: nowrap; padding: 34px 56px; border-radius: 999px; font-size: 50px; font-weight: 500; }
+  .btn-primary { background: #fff; color: #000; }
+  .btn-ghost { background: rgba(255,255,255,0.14); color: #fff; border: 1.5px solid rgba(255,255,255,0.3); }
+  .line { font-size: 46px; color: rgba(255,255,255,0.7); font-weight: 300; margin: 0; }
+  .check { width: 58px; height: 58px; border-radius: 50%; background: var(--blue); display: inline-flex; align-items: center; justify-content: center; margin-right: 30px; flex: none; }
+  .row { display: flex; align-items: center; font-size: 60px; font-weight: 400; padding: 36px 44px; border-radius: 36px; margin-bottom: 28px; }
+  .wordmark { font-weight: 600; font-size: 170px; letter-spacing: -0.05em; }
+  .caret { display: inline-block; width: 5px; height: 62px; background: #fff; vertical-align: -10px; margin-left: 6px; }
+  .sendbtn { width: 118px; height: 118px; border-radius: 50%; background: #fff; position: absolute; right: 22px; top: 22px; display: flex; align-items: center; justify-content: center; }
+</style>
+</head>
+<body>
+<div id="stage">
+
+  <!-- background: black with drifting blue blobs -->
+  <div class="blob" id="b1" style="width:900px;height:900px;background:radial-gradient(circle,var(--blue) 0%,rgba(47,123,255,0) 70%);"></div>
+  <div class="blob" id="b2" style="width:700px;height:700px;background:radial-gradient(circle,#4A90FF 0%,rgba(47,123,255,0) 70%);opacity:0.5;"></div>
+  <div class="blob" id="b3" style="width:800px;height:800px;background:radial-gradient(circle,var(--blue-deep) 0%,rgba(11,42,107,0) 70%);opacity:0.9;"></div>
+
+  <!-- Scene A: hook -->
+  <div class="layer center" id="sA">
+    <p class="h1" style="margin:0 60px;">Your next customer</p>
+    <p class="h1" style="margin:0 60px;">is searching now.</p>
+  </div>
+
+  <!-- Scene B: question + search pill -->
+  <div class="layer center" id="sB" style="justify-content:flex-start;padding-top:620px;box-sizing:border-box;">
+    <p class="h2" id="qB">Will they find you?</p>
+    <div class="glass pill" id="pill" style="position:relative;margin-top:120px;width:900px;height:170px;">
+      <div style="position:absolute;left:56px;top:0;height:170px;display:flex;align-items:center;font-size:58px;font-weight:400;">
+        <span id="typed"></span><span class="caret" id="caret"></span>
+      </div>
+      <div class="sendbtn" id="send" style="top:26px;right:26px;width:118px;height:118px;">
+        <svg width="54" height="54" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </div>
+    </div>
+    <div id="cursor" style="position:absolute;width:0;height:0;">
+      <svg width="64" height="72" viewBox="0 0 24 28" style="filter:drop-shadow(0 6px 14px rgba(0,0,0,0.5));"><path d="M2 1 L2 22 L7.5 17 L11 25 L14 23.6 L10.6 16.2 L18 16.2 Z" fill="#fff" stroke="#000" stroke-width="1"/></svg>
+    </div>
+  </div>
+
+  <!-- Scene C: website card, 3D tilt -->
+  <div class="layer" id="sC" style="perspective:2400px;">
+    <p class="h2 center" id="hC" style="position:absolute;left:0;width:1080px;top:150px;text-align:center;margin:0;">A site that works.</p>
+    <div class="card3d glass" id="card" style="transform-origin:50% 50%;">
+      <div style="padding:60px 60px 0;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <span style="font-size:44px;font-weight:600;">Demo Plumbing</span>
+          <span style="display:flex;gap:16px;"><span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.4)"></span><span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.4)"></span><span style="width:20px;height:20px;border-radius:50%;background:rgba(255,255,255,0.4)"></span></span>
+        </div>
+        <div style="margin-top:110px;font-size:104px;font-weight:300;line-height:1.02;letter-spacing:-0.035em;">Fixed right,<br>first time.</div>
+        <div style="margin-top:50px;font-size:44px;color:rgba(255,255,255,0.65);font-weight:300;">Local team. Same-day visits.</div>
+        <div style="margin-top:60px;display:flex;gap:24px;">
+          <span class="btn btn-primary">Call now</span>
+          <span class="btn btn-ghost">WhatsApp us</span>
+        </div>
+        <div style="margin-top:80px;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+          <div style="height:250px;border-radius:36px;background:linear-gradient(135deg,#2F7BFF,#0B2A6B);"></div>
+          <div style="height:250px;border-radius:36px;background:linear-gradient(135deg,#1C2233,#3A4560);"></div>
+          <div style="height:250px;border-radius:36px;background:linear-gradient(135deg,#3A4560,#1C2233);"></div>
+          <div style="height:250px;border-radius:36px;background:linear-gradient(135deg,#0B2A6B,#2F7BFF);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scene D: feature chips -->
+  <div class="layer" id="sD">
+    <p class="h2" style="position:absolute;left:0;width:1080px;top:260px;text-align:center;margin:0;">Built to be chosen.</p>
+    <div class="chip glass" id="c1" style="left:90px;top:620px;">Works on every phone</div>
+    <div class="chip glass" id="c2" style="left:430px;top:820px;">One-tap call</div>
+    <div class="chip glass" id="c3" style="left:120px;top:1020px;">Your work, in photos</div>
+    <div class="chip glass" id="c4" style="left:560px;top:1220px;">Found in search</div>
+    <div class="chip glass" id="c5" style="left:200px;top:1420px;">Your story, your way</div>
+  </div>
+
+  <!-- Scene E: speed + checklist -->
+  <div class="layer" id="sE">
+    <p class="h1 center" id="eA" style="position:absolute;left:0;width:1080px;top:380px;text-align:center;margin:0;">Built in days.</p>
+    <p class="h1 center" id="eB" style="position:absolute;left:0;width:1080px;top:520px;text-align:center;margin:0;color:var(--blue);">Not months.</p>
+    <div id="list" style="position:absolute;left:150px;top:900px;width:780px;">
+      <div class="row glass" id="r1"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Design approved</div>
+      <div class="row glass" id="r2"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Mobile checked</div>
+      <div class="row glass" id="r3"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Call buttons live</div>
+      <div class="row glass" id="r4"><span class="check"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>Live this week</div>
+    </div>
+  </div>
+
+  <!-- Scene F: logo lockup + orbit -->
+  <div class="layer center" id="sF">
+    <div class="glass pill" id="logoPill" style="padding:50px 110px;">
+      <span class="wordmark">CYWEB</span>
+    </div>
+    <div id="orbit" style="position:absolute;left:540px;top:960px;width:0;height:0;"></div>
+  </div>
+
+  <!-- Scene G: tagline -->
+  <div class="layer center" id="sG">
+    <p class="h1" style="margin:0;" id="tg1">Be found.</p>
+    <p class="h1" style="margin:0;color:var(--blue);" id="tg2">Be chosen.</p>
+  </div>
+
+  <!-- Scene H: end card -->
+  <div class="layer center" id="sH">
+    <div class="wordmark" style="font-size:150px;">CYWEB</div>
+    <p class="line" style="margin-top:50px;font-size:58px;color:#fff;font-weight:400;">cywebdev.com</p>
+    <p class="line" style="margin-top:24px;">CYWEB team</p>
+  </div>
+
+  <!-- corner watermark -->
+  <div id="wm" style="position:absolute;right:60px;bottom:70px;font-size:40px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:-0.02em;">CYWEB</div>
+
+  <!-- fade-to-black overlay used for transitions -->
+  <div id="fade" style="position:absolute;left:0;top:0;width:1080px;height:1920px;background:#000;opacity:0;"></div>
+</div>
+
+<script>
+  const E = (x) => 1 - Math.pow(1 - Math.min(Math.max(x,0),1), 3);     // ease out cubic
+  const EI = (x) => { x = Math.min(Math.max(x,0),1); return x<.5 ? 4*x*x*x : 1-Math.pow(-2*x+2,3)/2; };
+  const P = (t, a, b) => (t - a) / (b - a);                            // progress 0..1
+  const $ = (id) => document.getElementById(id);
+  const set = (el, o) => { if (!el) return; for (const k in o) el.style[k] = o[k]; };
+  const vis = (el, v) => set(el, { opacity: v, display: v > 0.001 ? '' : 'none' });
+
+  const FULL = "Customers search. Find a site that works.";
+  const TYPE = "plumber Limassol";
+
+  // Scenes start at 0s and loop at 25s; the last second eases toward the opening frame.
+  const SEG = { A:[0,3.2], B:[3.2,6.9], C:[6.9,10.5], D:[10.5,13.6], E:[13.6,16.9], F:[16.9,20.0], G:[20.0,23.0], H:[23.0,25.0] };
+
+  function render(t) {
+    const T = t;
+    // background drift
+    const drift = Math.sin(T * 0.6);
+    set($('b1'), { left: (120 + 80*Math.cos(T*0.35)) + 'px', top: (420 + 60*drift) + 'px', opacity: 0.55 + 0.25*Math.sin(T*0.5) });
+    set($('b2'), { left: (560 + 70*Math.sin(T*0.42)) + 'px', top: (1100 + 90*Math.cos(T*0.3)) + 'px', opacity: 0.35 + 0.2*Math.cos(T*0.6) });
+    set($('b3'), { left: (200 + 60*Math.sin(T*0.25)) + 'px', top: (1300 + 70*Math.sin(T*0.5)) + 'px' });
+
+    // scene visibility + blur-in/out transitions
+    const scenes = ['sA','sB','sC','sD','sE','sF','sG','sH'];
+    const keys = ['A','B','C','D','E','F','G','H'];
+    keys.forEach((k, i) => {
+      const [a, b] = SEG[k];
+      const inP = E(P(T, a, a + 0.5));
+      const outP = (T > b - 0.4) ? EI(P(T, b - 0.4, b)) : 0;
+      const alpha = Math.max(0, Math.min(1, inP) * (1 - outP));
+      const blur = (1 - Math.min(1, inP)) * 18 + outP * 18;
+      const el = $(scenes[i]);
+      set(el, { opacity: alpha, filter: blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : 'none' });
+      el.style.display = (T >= a - 0.3 && T <= b + 0.3) ? '' : 'none';
+    });
+
+    // Scene A
+    set($('sA').children[0], { transform: `translateY(${(1-E(P(T,0,0.7)))*40}px)` });
+    set($('sA').children[1], { transform: `translateY(${(1-E(P(T,0.35,1.05)))*40}px)` });
+
+    // Scene B: question, then pill, typing, click
+    const qB = E(P(T, 3.3, 3.8));
+    set($('qB'), { opacity: qB, transform: `translateY(${(1-qB)*30}px)` });
+    const pillP = E(P(T, 4.0, 4.6));
+    set($('pill'), { opacity: pillP, transform: `translateY(${(1-pillP)*40}px) scale(${0.96+0.04*pillP})` });
+    const typeP = Math.min(1, Math.max(0, P(T, 4.7, 5.9)));
+    const n = Math.round(typeP * TYPE.length);
+    $('typed').textContent = TYPE.slice(0, n);
+    $('caret').style.opacity = (Math.floor(T*3) % 2 === 0 || typeP < 1) ? 1 : 0;
+    const clickP = P(T, 6.1, 6.3);
+    const sendScale = (clickP >= 0 && clickP < 1) ? 1 - 0.14*Math.sin(clickP*Math.PI) : 1;
+    set($('send'), { transform: `scale(${sendScale})` });
+    // cursor path from bottom right to send button
+    const cur = E(P(T, 5.0, 6.1));
+    const cx = 880 + (960-880) * cur, cy = 1200 - (1200-1000) * cur;
+    const cursorOp = Math.min(1, P(T,4.9,5.3)) * (T < 6.9 ? 1 : 0);
+    set($('cursor'), { left: cx + 'px', top: cy + 'px', opacity: Math.max(0,cursorOp) });
+
+    // Scene C: 3D card tilts and rises in
+    const cP = E(P(T, 7.0, 8.1));
+    const rx = 28 * (1 - cP), ry = -18 * (1 - cP);
+    set($('card'), { opacity: cP, filter: `blur(${(1-cP)*14}px)`,
+      transform: `translateY(${(1-cP)*180}px) rotateX(${rx}deg) rotateY(${ry}deg) scale(${0.92+0.08*cP})` });
+    const hC = E(P(T, 7.0, 7.6));
+    set($('hC'), { opacity: hC, transform: `translateY(${(1-hC)*24}px)` });
+
+    // Scene D: chips pop in with a slight float
+    [['c1',10.7],['c2',11.3],['c3',11.9],['c4',12.5],['c5',13.0]].forEach(([id,s]) => {
+      const p = E(P(T, s, s + 0.45));
+      const f = Math.sin((T - s) * 2) * 6;
+      set($(id), { opacity: p, transform: `translateY(${(1-p)*60 + f*(p>0.9?1:0)}px) scale(${0.85+0.15*p})` });
+    });
+    const dH = E(P(T, 10.6, 11.1));
+    set($('sD').children[0], { opacity: dH, transform: `translateY(${(1-dH)*30}px)` });
+
+    // Scene E: headlines, checklist
+    const eA = E(P(T, 13.8, 14.3)), eB = E(P(T, 14.2, 14.7));
+    set($('eA'), { opacity: eA, transform: `translateY(${(1-eA)*36}px)` });
+    set($('eB'), { opacity: eB, transform: `translateY(${(1-eB)*36}px)` });
+    ['r1','r2','r3','r4'].forEach((id, i) => {
+      const s = 14.8 + i*0.35;
+      const p = E(P(T, s, s + 0.4));
+      set($(id), { opacity: p, transform: `translateX(${(1-p)*80}px)` });
+    });
+
+    // Scene F: logo + orbit chips
+    const lP = E(P(T, 17.0, 17.7));
+    set($('logoPill'), { opacity: lP, transform: `scale(${0.85+0.15*lP})` });
+    const orbit = $('orbit');
+    orbit.innerHTML = '';
+    const labels = ['Websites','Photos','Videos','Social content'];
+    labels.forEach((lab, i) => {
+      const a = Math.PI/4 + (T - 17.4) * 0.12 + i * (Math.PI*2/labels.length);
+      const rr = E(P(T, 17.4, 18.2));
+      const x = Math.cos(a) * 330 * rr, y = Math.sin(a) * 440 * rr;
+      const d = document.createElement('div');
+      d.className = 'chip glass';
+      d.textContent = lab;
+      d.style.position = 'absolute';
+      d.style.whiteSpace = 'nowrap';
+      d.style.transform = 'translate(-50%,-50%)';
+      d.style.left = x + 'px';
+      d.style.top = y + 'px';
+      d.style.fontSize = '50px';
+      d.style.opacity = E(P(T, 17.4 + i*0.1, 18.2 + i*0.1));
+      orbit.appendChild(d);
+    });
+    // Scene F lockup pill sits above center; orbit is centered on the pill
+    set($('sF').children[1], { left: '540px', top: '960px' });
+
+    // Scene G: tagline lines
+    const g1 = E(P(T, 20.2, 20.7)), g2 = E(P(T, 20.9, 21.4));
+    set($('tg1'), { opacity: g1, transform: `translateY(${(1-g1)*30}px)` });
+    set($('tg2'), { opacity: g2, transform: `translateY(${(1-g2)*30}px)` });
+
+    // Scene H: end card + loop back to opening frame during last second
+    const hP = E(P(T, 23.2, 23.8));
+    set($('sH').children[0], { opacity: hP });
+    set($('sH').children[1], { opacity: hP });
+    set($('sH').children[2], { opacity: hP });
+    set($('wm'), { opacity: T > 23.2 ? 0 : 0.7 });
+
+    // loop: fade to black at the very end then the opening frame fades in (frame 0 = blobs only)
+    const endFade = EI(P(T, 24.0, 25.0));
+    set($('fade'), { opacity: endFade });
+  }
+
+  window.__render = render;
+  render(0);
+</script>
+</body>
+</html>
