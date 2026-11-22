@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <style>
-  :root { --blue: #2F7BFF; --blue-deep: #0B2A6B; }
+  :root { --blue: #0064F0; --blue-deep: #0A2A6B; }
   html, body { margin: 0; padding: 0; background: #000; }
   #stage {
     position: relative; width: 1080px; height: 1920px; overflow: hidden;
@@ -115,8 +115,8 @@
 
   <!-- Scene F: logo lockup + orbit -->
   <div class="layer center" id="sF">
-    <div class="glass pill" id="logoPill" style="padding:50px 110px;">
-      <span class="wordmark">CYWEB</span>
+    <div class="glass pill" id="logoPill" style="padding:60px 80px;">
+      <img src="cyweb-logo.png" style="width:640px;display:block;">
     </div>
     <div id="orbit" style="position:absolute;left:540px;top:960px;width:0;height:0;"></div>
   </div>
@@ -129,13 +129,14 @@
 
   <!-- Scene H: end card -->
   <div class="layer center" id="sH">
-    <div class="wordmark" style="font-size:150px;">CYWEB</div>
+    <img src="cyweb-logo.png" style="width:620px;display:block;">
     <p class="line" style="margin-top:50px;font-size:58px;color:#fff;font-weight:400;">cywebdev.com</p>
     <p class="line" style="margin-top:24px;">CYWEB team</p>
   </div>
 
   <!-- corner watermark -->
-  <div id="wm" style="position:absolute;right:60px;bottom:70px;font-size:40px;font-weight:600;color:rgba(255,255,255,0.7);letter-spacing:-0.02em;">CYWEB</div>
+  <img id="wm" src="cyweb-logo.png" style="position:absolute;right:60px;bottom:70px;width:150px;opacity:0.7;">
+
 
   <!-- fade-to-black overlay used for transitions -->
   <div id="fade" style="position:absolute;left:0;top:0;width:1080px;height:1920px;background:#000;opacity:0;"></div>

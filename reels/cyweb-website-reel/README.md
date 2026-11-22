@@ -20,7 +20,7 @@
 
 ## Open items
 - Sound: the Kenyset [SFX] folder was found on Drive but its files could not be listed, so the clicks are placeholder synth tones and the music is a placeholder pad. Replace with pack sounds on the same frames.
-- Logo: the CYWEB wordmark is set as text in Inter. Swap in the real logo file and confirm the exact blue (currently #2F7BFF).
+- Logo: uses the CYWEB logo file (cyweb-logo.png) from the owners. Brand blue sampled as #0064F0.
 - Demo card: "Demo Plumbing" is a placeholder business, not a client.
 
 ## Caption (no emojis, no prices, signed CYWEB team)
