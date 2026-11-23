@@ -13,7 +13,37 @@ SRC = np.float32([[0, 0], [1920, 0], [1920, 1080], [0, 1080]])
 M = cv2.getPerspectiveTransform(SRC, C)
 ss = 4; big = cv2.warpPerspective(np.full((1080, 1920), 255, np.uint8), cv2.getPerspectiveTransform(SRC, C * ss), (W * ss, H * ss), flags=cv2.INTER_NEAREST)
 mask = cv2.resize(big.astype(np.float32) / 255, (W, H), interpolation=cv2.INTER_AREA)[..., None]
-lab = cv2.imread('desk/labels.png', cv2.IMREAD_UNCHANGED).astype(np.float32); la = lab[..., 3:4] / 255; lrgb = lab[..., :3]
+lab = cv2.imread('desk/labels.png', cv2.IMREAD_UNCHANGED).astype(np.float32)
+L1 = lab.copy(); L1[372:] = 0                      # label 1 (hook) rows 263-361
+L2 = lab.copy(); L2[:372] = 0                      # label 2 (CTA) rows 377-454
+CAPS = json.load(open('desk/captions.json')); CAPIMG = [cv2.imread(f'desk/captions/{i}.png', cv2.IMREAD_UNCHANGED).astype(np.float32) for i in range(len(CAPS))]
+CAP_Y = 1290                                       # caption centre: between the monitor and the keyboard
+def ease(t): t = min(1, max(0, t)); return 1 - (1 - t) ** 3
+def place(layer, scale, dy, blur, alpha, cx, cy):
+  """transform an RGBA layer about (cx,cy): scale, vertical offset, blur, opacity"""
+  M2 = cv2.getRotationMatrix2D((cx, cy), 0, scale); M2[1, 2] += dy
+  out = cv2.warpAffine(layer, M2, (layer.shape[1], layer.shape[0]), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0))
+  if blur > 0.3: out = cv2.GaussianBlur(out, (0, 0), blur)
+  out[..., 3] *= alpha; return out
+def over(img, layer):
+  a = layer[..., 3:4] / 255.0
+  if layer[..., :3].max() > 0: rgb = np.where(a > 1e-4, layer[..., :3] / np.maximum(layer[..., 3:4] / 255.0, 1e-4) if False else layer[..., :3], 0)
+  return img * (1 - a) + layer[..., :3] * a
+def overlays(k, img):
+  f = k + 1
+  # hook: label 1 slams in (f1-7), label 2 follows (f7-13); both static after
+  t1 = ease((f - 1) / 6); t2 = ease((f - 7) / 6)
+  img = over(img, place(L1, 1.25 - .25 * t1, 0, 12 * (1 - t1), t1, 540, 312))
+  img = over(img, place(L2, 1.0, -18 * (1 - t2), 10 * (1 - t2), t2, 540, 416))
+  # captions: blur in (5 f), hold, fade out (3 f)
+  for c, im in zip(CAPS, CAPIMG):
+    if c['from'] <= f <= c['to']:
+      ti = ease((f - c['from'] + 1) / 5); to = 1 - min(1, max(0, (f - (c['to'] - 3)) / 3)) if c['to'] < 360 else 1
+      a = ti * to
+      lay = place(im, .9 + .1 * ti, 16 * (1 - ti), 12 * (1 - ti) + 6 * (1 - to), a, 540, 150)
+      full = np.zeros((H, W, 4), np.float32); y0 = CAP_Y - 150; full[y0:y0 + 300] = lay
+      img = over(img, full)
+  return img
 # depth of field: focus on the screen centre, thin-lens style CoC in px
 df = float(np.median(depth[mask[..., 0] > .9])); coc = np.clip(np.abs(1 / np.maximum(depth, .05) - 1 / df) * 7.5, 0, 9)
 coc[mask[..., 0] > .5] = 0; coc = cv2.GaussianBlur(coc, (0, 0), 6)[..., None]
@@ -47,7 +77,7 @@ def frame(k):
   rng = np.random.default_rng(k); g = rng.normal(0, 1, (H, W)).astype(np.float32)
   g = cv2.GaussianBlur(g, (0, 0), .6) * (2.2 + 3.0 * (1 - img.mean(2) / 255))
   img += g[..., None]
-  img = img * (1 - la) + lrgb * la
+  img = overlays(k, img)
   return np.clip(img + .5, 0, 255).astype(np.uint8)
 if __name__ == '__main__':
   os.makedirs('out/desk', exist_ok=True)
