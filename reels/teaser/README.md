@@ -6,12 +6,23 @@ A keynote-style screen film on a monitor in a desk shot, built in code and rende
 - `out/stills/` — one desk still per scene + `_sheet_ref_vs_mine.png`
 - `out/qc.json`, `out/qc_text.json`, `out/diff_metrics.json` — checks
 
+## What the screen says about CYWEB
+| Beat | Shows |
+|---|---|
+| Title + icon | "With CYWEB Websites", CY logo on a glass app icon |
+| Panel | What CYWEB does: Websites · Photos · Videos · Bookings, plus WhatsApp, Google Maps and "Your business"; cywebdev.com and "Local businesses" along the bottom; cursor clicks the CYWEB logo |
+| Phone tunnel | Four sites like the ones CYWEB builds: a café (Book a table, WhatsApp us, Google stars, menu, map), a salon (Book online, free times), a clinic (Call now, Book a visit, services, hours), a booking calendar |
+| Line change | "Just Ask" → "Get More Bookings" |
+| Whip | The booking site ("Book your visit") flies past the lens |
+| Bar | Counts to 100% |
+| Close | "Your Business Online", then the CYWEB mark; end card: full CYWEB logo with "Websites that help local businesses grow" |
+
 ## Lines
 | Slot | Reference | CYWEB |
 |---|---|---|
 | Intro (With + 2-word name) | With Apple Intelligence | With CYWEB Websites |
 | Invite (2 words) | Just Ask | Just Ask |
-| Payoff (3 words) | See The Magic | Watch It Grow |
+| Payoff (3 words) | See The Magic | Get More Bookings |
 | Closing (2 + 1 words) | Pro Workflow / Unleashed | Your Business / Online |
 | Label 1 | OPUS 5.5 COOKED | CYWEB BUILT THIS (accent: reference orange #D57C58) |
 | Label 2 | COMMENT "CLAUDE" FOR FULL GUIDE | COMMENT "WEBSITE" TO GET YOURS |
@@ -34,6 +45,6 @@ python3 tools/audio.py && ffmpeg -i out/audio.wav -af loudnorm=I=-14:TP=-1 out/a
 ```
 
 ## Caption
-Your business, online. We design and build websites that help local businesses grow.
+Your business, online. CYWEB builds websites for local businesses in Cyprus: bookings, WhatsApp, Google Maps, plus photos and videos that show you at your best.
 Comment "WEBSITE" and we'll show you how yours could look.
 CYWEB team

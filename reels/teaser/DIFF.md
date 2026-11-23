@@ -39,3 +39,8 @@ The reference room was only a match target; this round the shot moves to its own
 13. **Glass**: the screen keeps the room's reflection from the base pass on top of the picture; slight off-axis contrast loss.
 14. **Lens**: bloom on the lamp, light strip and bright screen, depth of field from the depth pass (keyboard and mouse slightly soft, screen sharp), ACES tone mapping, vignette, chromatic aberration, grain.
 15. **Labels**: same boxes; 85.6 px clear of the light bar (projected from 3D), 144 px clear of the screen.
+
+### Round 4: say what CYWEB offers
+16. Panel rebuilt as "what we do": Websites, Photos, Videos, Bookings, WhatsApp, Google Maps, Your business, cywebdev.com, Local businesses (type ~2x larger so it reads on a phone).
+17. Phone screens rebuilt as real-looking CYWEB-style sites (café, salon, clinic, booking calendar) with the features CYWEB sells: booking, WhatsApp button, Google stars, map, call button.
+18. Payoff line "Get More Bookings"; end card = full CYWEB logo with its tagline.

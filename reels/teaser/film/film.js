@@ -117,8 +117,8 @@ fly.querySelector('img').style.width = '120px';
 gsap.set(fly, { xPercent: -50, yPercent: -50, x: X(481), y: X(341), scale: 1, opacity: 0, zIndex: 5 });
 tl.set(fly, { opacity: 1 }, F(72)); tl.set(icon, { opacity: 0 }, F(72));
 tl.to(fly, { x: X(533), y: X(293), scale: 160 / 98, duration: F(77) - F(72), ease: 'power2.in' }, F(72));
-tl.to(fly, { x: X(613), y: X(373), scale: 1.75, duration: F(89) - F(77), ease: 'expo.out' }, F(77));
-tl.to(fly, { x: X(635), y: X(383), duration: F(97) - F(89), ease: 'sine.out' }, F(89));
+tl.to(fly, { x: X(613), y: X(398), scale: 1.6, duration: F(89) - F(77), ease: 'expo.out' }, F(77));
+tl.to(fly, { x: X(635), y: X(410), duration: F(97) - F(89), ease: 'sine.out' }, F(89));   // panel logo tile (moved down for the services row)
 tl.to(fly, { opacity: 0, duration: F(92) - F(88) }, F(88));
 blurKeys([fly], [[1, 0], [72, 0], [75, 3], [77, 5], [81, 2], [85, 0]]);
 tl.to(title, { y: `+=${X(90)}`, duration: F(77) - F(70), ease: 'power2.in' }, F(70));
@@ -143,7 +143,7 @@ tl.to(panel, { x: 6, duration: F(119) - F(91), ease: 'sine.inOut' }, F(91));
 tl.to(panel, { y: -140, rotationX: 40, duration: F(124) - F(119), ease: 'power2.in' }, F(119));
 tl.to(pw, { opacity: 0, duration: F(124) - F(120), ease: 'power1.in' }, F(120));
 // cursor: enters with the panel, settles at the logo tile's lower right, clicks at f107
-tl.to(cur, { x: X(706), y: X(434), duration: F(97) - F(85), ease: 'sine.out' }, F(85));
+tl.to(cur, { x: X(700), y: X(452), duration: F(97) - F(85), ease: 'sine.out' }, F(85));
 tl.to(cur, { scale: .82, duration: F(107) - F(105), ease: 'power2.in' }, F(105))
   .to(cur, { scale: 1, duration: F(111) - F(107), ease: 'power2.out' }, F(107));
 tl.to(pIcon, { scale: .93, duration: F(107) - F(105), ease: 'power2.in' }, F(105))
@@ -302,7 +302,7 @@ tl.set(logo, { opacity: 1 }, F(329));
 track(logo, 'x', [[329, X(722)], [330, X(702)], [331, X(689)], [332, X(679)], [333, X(672)], [334, X(665)], [335, X(660)], [336, X(656)], [337, X(653)], [338, X(650)], [339, X(647)], [340, X(645)], [341, X(643)], [342, X(641)], [343, X(640)], [348, X(638)]]);
 blurKeys([logo], [[1, 10], [329, 10], [330, 4], [331, 1], [332, 0]]);
 tl.to(white, { opacity: 1, duration: F(349) - F(347), ease: 'power2.in' }, F(347));
-gsap.set(logoEnd, { width: LW * .72, height: LH * .72, xPercent: -50, yPercent: -50, x: X(637), y: X(361), opacity: 0 });
+gsap.set(logoEnd, { width: 470, height: 470 * 934 / 1172, xPercent: -50, yPercent: -50, x: X(637), y: X(361), opacity: 0 });   // full logo + tagline
 tl.set(logoEnd, { opacity: 1 }, F(349));
 tl.set(logo, { opacity: 0 }, F(349));
 

@@ -36,11 +36,11 @@ canvas#glow{position:absolute;inset:0}
 #panel{position:absolute;left:297px;top:126px;width:1326px;height:720px;transform-style:preserve-3d;border-radius:48px}
 #panel .glass{inset:0;border-radius:48px;border-width:3px;background:linear-gradient(170deg,rgba(255,255,255,.20),rgba(220,250,248,.08) 40%,rgba(160,240,235,.12));box-shadow:inset 0 3px 0 rgba(255,255,255,.8),inset 0 0 60px rgba(200,255,250,.12),0 0 40px rgba(180,255,250,.35)}
 .p-el{position:absolute;transform:translate(-50%,-50%)}
-.chip{width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#cfd8de 55%,#7d8b94);box-shadow:0 0 0 2px rgba(255,255,255,.5)}
-.chip svg{position:absolute;left:50%;top:50%;width:38px;height:38px;transform:translate(-50%,-50%)}
-.clab{position:absolute;left:50%;top:84px;transform:translateX(-50%);font-size:17px;color:rgba(255,255,255,.9);white-space:nowrap}
-.hd{font-size:17px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.85)}
-.pill{height:50px;border-radius:25px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.18);font-size:17px;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:12px;padding:0 22px;white-space:nowrap}
+.chip{width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#cfd8de 55%,#7d8b94);box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+.chip svg{position:absolute;left:50%;top:50%;width:52px;height:52px;transform:translate(-50%,-50%)}
+.clab{position:absolute;left:50%;top:106px;transform:translateX(-50%);font-size:30px;font-weight:500;color:rgba(255,255,255,.95);white-space:nowrap}
+.hd{font-size:26px;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.8)}
+.pill{height:66px;border-radius:33px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.22);font-size:28px;justify-content:center;color:rgba(255,255,255,.75);display:flex;align-items:center;gap:12px;padding:0 22px;white-space:nowrap}
 .pill i{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#9aa7ae);display:inline-block}
 
 /* tunnel */
@@ -108,29 +108,29 @@ canvas#glow{position:absolute;inset:0}
     <div class="glass icon" id="icon"><img src="img/cy-mark-white.png"></div>
   </div>
 
-  <!-- 3: panel -->
+  <!-- 3: panel — what CYWEB does -->
   <div id="panelWrap"><div id="panel">
     <div class="glass"></div>
-    <div class="p-el" style="left:490px;top:131px">
-      <div class="chip" style="width:96px;height:96px;background:radial-gradient(circle at 35% 30%,#7fb6ff,#005ff6 60%,#003a9e)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></div>
-      <div class="clab" style="top:104px">Bookings</div></div>
-    <div class="p-el" style="left:688px;top:189px">
-      <div style="width:250px;height:250px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#2b3d5a,#0b1220 70%);box-shadow:0 0 0 6px rgba(120,150,255,.55),0 0 40px 8px rgba(110,90,255,.55),inset 0 0 30px rgba(140,160,255,.35)">
-        <svg viewBox="0 0 100 100" style="position:absolute;inset:0"><circle cx="50" cy="40" r="17" fill="#e9eef7"/><path d="M18 88c4-20 18-28 32-28s28 8 32 28" fill="#e9eef7"/></svg></div></div>
-    <div class="p-el" style="left:850px;top:56px">
-      <div style="width:66px;height:66px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#3a4a63,#111a29);box-shadow:0 0 0 2px rgba(255,255,255,.6)"><svg viewBox="0 0 100 100" style="position:absolute;inset:0"><circle cx="50" cy="40" r="17" fill="#e9eef7"/><path d="M18 88c4-20 18-28 32-28s28 8 32 28" fill="#e9eef7"/></svg></div>
-      <div class="clab" style="top:72px">Owner</div></div>
-    <div class="glass icon p-el" id="pIcon" style="left:663px;top:420px;width:300px;height:218px;border-radius:44px;transform:translate(-50%,-50%)"><img src="img/cy-mark-white.png" style="width:220px"></div>
-    <div class="p-el hd" style="left:214px;top:418px">SUGGESTIONS</div>
-    <div class="p-el hd" style="left:1210px;top:418px">SHOW MORE</div>
-    <div class="p-el" style="left:239px;top:480px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#334" stroke-width="2"><path d="M5 11h12a3 3 0 010 6h-1M5 11v5a4 4 0 004 4h4a4 4 0 004-4v-5M8 4v3M12 4v3"/></svg></div><div class="clab">Café</div></div>
-    <div class="p-el" style="left:416px;top:480px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#334" stroke-width="2"><circle cx="6" cy="7" r="3"/><circle cx="6" cy="17" r="3"/><path d="M8.5 8.5L20 18M8.5 15.5L20 6"/></svg></div><div class="clab">Salon</div></div>
-    <div class="p-el" style="left:946px;top:480px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#334" stroke-width="2"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg></div><div class="clab">Reviews</div></div>
-    <div class="p-el" style="left:1120px;top:480px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#334" stroke-width="2"><path d="M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div><div class="clab">Directions</div></div>
-    <div class="p-el pill" style="left:330px;top:640px;width:420px"><i></i>Ask CYWEB…</div>
-    <div class="p-el pill" style="left:960px;top:640px"><i></i>Bookings</div>
-    <div class="p-el pill" style="left:1140px;top:640px"><i></i>Reviews</div>
-    <div class="p-el" style="left:663px;top:672px;width:420px;height:6px;border-radius:3px;background:rgba(255,255,255,.8)"></div>
+    <div class="p-el" style="left:440px;top:120px">
+      <div class="chip" style="width:104px;height:104px;background:radial-gradient(circle at 35% 30%,#8fe6b0,#25a35a 60%,#136b3a)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 01-11.8 7L4 20l1.4-4A8 8 0 1120 11.5z"/></svg></div>
+      <div class="clab" style="top:116px">WhatsApp</div></div>
+    <div class="p-el" style="left:663px;top:150px">
+      <div style="width:230px;height:230px;border-radius:50%;background:radial-gradient(circle at 50% 38%,#2d4466,#0b1220 72%);box-shadow:0 0 0 6px rgba(120,170,255,.6),0 0 40px 8px rgba(70,130,255,.5),inset 0 0 30px rgba(140,170,255,.35)">
+        <svg viewBox="0 0 24 24" style="position:absolute;left:50%;top:46%;width:120px;transform:translate(-50%,-50%)" fill="none" stroke="#eaf1fb" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10l1.5-5h13L20 10M5 10v10h14V10M4 10h16M9.5 20v-5h5v5"/></svg></div>
+      <div class="clab" style="top:244px">Your business</div></div>
+    <div class="p-el" style="left:890px;top:120px">
+      <div class="chip" style="width:104px;height:104px;background:radial-gradient(circle at 35% 30%,#ff9d8f,#e24c3b 60%,#9c2416)"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.5-7-12a7 7 0 0114 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div class="clab" style="top:116px">Google Maps</div></div>
+    <div class="glass icon p-el" id="pIcon" style="left:663px;top:470px;width:270px;height:196px;border-radius:42px;transform:translate(-50%,-50%)"><img src="img/cy-mark-white.png" style="width:200px"></div>
+    <div class="p-el hd" style="left:200px;top:372px">WHAT WE DO</div>
+    <div class="p-el hd" style="left:1125px;top:372px">CYPRUS</div>
+    <div class="p-el" style="left:150px;top:450px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#1d2a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="15" rx="2.5"/><path d="M3 8.5h18M6 6.3h.01M8.5 6.3h.01"/></svg></div><div class="clab">Websites</div></div>
+    <div class="p-el" style="left:350px;top:450px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#1d2a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.5h6.8L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg></div><div class="clab">Photos</div></div>
+    <div class="p-el" style="left:976px;top:450px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#1d2a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.8-2.8z" fill="#1d2a3a"/></svg></div><div class="clab">Videos</div></div>
+    <div class="p-el" style="left:1176px;top:450px"><div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="#1d2a3a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4M8.5 14h2M13.5 14h2"/></svg></div><div class="clab">Bookings</div></div>
+    <div class="p-el pill" style="left:300px;top:640px;width:400px"><i></i>cywebdev.com</div>
+    <div class="p-el pill" style="left:1040px;top:640px;width:400px"><i></i>Local businesses</div>
+    <div class="p-el" style="left:663px;top:684px;width:300px;height:6px;border-radius:3px;background:rgba(255,255,255,.8)"></div>
   </div></div>
 
   <!-- 4: invite -->
@@ -143,7 +143,7 @@ canvas#glow{position:absolute;inset:0}
     <div class="wall" id="wR"><div class="phone" id="phR"><div class="glass-in" data-screen="clinic"></div></div></div>
     <div class="wall" id="wB"><div class="phone" id="phB"><div class="glass-in" data-screen="calendar"></div></div></div>
   </div></div>
-  <div class="layer" id="s4"><div class="line" id="payA" style="font-size:44px">Just Ask</div><div class="line" id="payB" style="font-size:60px"><span class="w">Watch</span> <span class="w">It</span> <span class="w">Grow</span></div></div>
+  <div class="layer" id="s4"><div class="line" id="payA" style="font-size:44px">Just Ask</div><div class="line" id="payB" style="font-size:60px"><span class="w">Get</span> <span class="w">More</span> <span class="w">Bookings</span></div></div>
   <div id="whipWrap"><div id="whip"><div class="phone" id="phW"><div class="glass-in" data-screen="calendar"></div></div></div></div>
 
   <!-- 6: bar -->
@@ -154,7 +154,7 @@ canvas#glow{position:absolute;inset:0}
   <div class="layer" id="s6"><div class="line" id="close" style="font-size:64px;font-weight:500"><span class="w" id="cA">Your</span> <span class="w" id="cB">Business</span> <span class="w" id="cC">Online</span></div></div>
   <img id="logo" src="img/cy-mark-light.png">
   <div id="white"></div>
-  <img id="logoEnd" src="img/cy-mark.png">
+  <img id="logoEnd" src="img/cyweb-logo-full.png">
 
   <svg id="cursor" viewBox="0 0 72 80"><path d="M6 5 L64 40 L30 46 L14 74 Z" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.95)" stroke-width="3.5" stroke-linejoin="round"/></svg>
 </div>
