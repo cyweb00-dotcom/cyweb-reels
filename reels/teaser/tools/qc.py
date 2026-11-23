@@ -57,7 +57,8 @@ runs = np.split(rows_used, np.where(np.diff(rows_used) > 1)[0] + 1)
 boxes = [(int(r[0]), int(r[-1])) for r in runs]
 screen_top = float(min(C[0, 1], C[1, 1]))
 import os
-lightbar_top = json.load(open('desk/room/monitor_top.json')) if os.path.exists('desk/room/monitor_top.json') else 505   # top of light bar/monitor (bounding box, projected)
+_cfg = json.load(open('desk/corners.json'))
+lightbar_top = _cfg.get('monitor_top') or (json.load(open('desk/room/monitor_top.json')) if os.path.exists('desk/room/monitor_top.json') else 505)   # top of light bar/monitor (bounding box, projected)
 ov = dict(label_boxes_y=boxes, gap_between_labels_px=boxes[1][0] - boxes[0][1] - 1, label_bottom_to_monitor_top_px=round(lightbar_top - boxes[-1][1], 1),
           label_bottom_to_screen_px=round(screen_top - boxes[-1][1], 1), labels_inside_frame=bool(xs.min() > 0 and xs.max() < 1079 and ys.min() > 0))
 rep = dict(lock=lock, text_clearance_film_px=clear, overlap=ov)

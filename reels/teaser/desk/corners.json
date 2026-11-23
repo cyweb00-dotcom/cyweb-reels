@@ -1,22 +1,44 @@
 {
- "plate": "desk/room/base.png",
+ "plate": "desk/plate_user.png",
  "corners": [
   [
-   117.0,
-   598.4
+   40.70000076293945,
+   650.5
   ],
   [
-   918.4,
-   603.4
+   1029.5,
+   645.0
   ],
   [
-   894.5,
-   1051.2
+   1032.199951171875,
+   1158.5999755859375
   ],
   [
-   142.3,
-   1022.9
+   40.70000076293945,
+   1143.5
   ]
  ],
- "note": "Own camera angle: 3D room desk/room.html, screen corners projected from the 3D monitor."
+ "source": "assets/desk_user.png",
+ "source_corners": [
+  [
+   205.0,
+   475.0
+  ],
+  [
+   927.0,
+   471.0
+  ],
+  [
+   929.0,
+   846.0
+  ],
+  [
+   205.0,
+   835.0
+  ]
+ ],
+ "scale": 1.369472182596291,
+ "crop_x0": 240,
+ "monitor_top": 582.0,
+ "note": "User's desk photo (assets/desk_user.png); baked-in labels painted out; corners measured on the photo."
 }
