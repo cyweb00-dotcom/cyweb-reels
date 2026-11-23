@@ -2,7 +2,8 @@
 
 A keynote-style screen film on a monitor in a desk shot, built in code and rendered frame by frame. Timing, layout, motion and sound hits follow `ref/reference.mp4` (measured, see SHOT.md / REF.md / DIFF.md). Every graphic is rebuilt; nothing is cut out of the reference.
 
-- `out/final.mp4` — the reel
+- `out/final.mp4` — the reel (high quality) · `out/final_small.mp4` — light export for posting (~2.7 MB)
+- Captions (`desk/captions.json`), hook labels animate in over the first second, sound rebuilt in `tools/audio.py`
 - `out/stills/` — one desk still per scene + `_sheet_ref_vs_mine.png`
 - `out/qc.json`, `out/qc_text.json`, `out/diff_metrics.json` — checks
 
