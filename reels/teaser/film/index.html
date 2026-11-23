@@ -48,20 +48,20 @@ canvas#glow{position:absolute;inset:0}
 #tunnel{position:absolute;left:964px;top:521px;width:0;height:0;transform-style:preserve-3d}
 .wall{position:absolute;transform-style:preserve-3d}
 .phone{position:absolute;left:0;top:0;border-radius:120px;background:#0c0d10;padding:22px;box-shadow:0 0 0 4px #2a2c31,0 0 0 7px #0c0d10}
-.phone .glass-in{position:absolute;inset:22px;border-radius:100px;overflow:hidden;background:#f4f6f6}
+.phone .glass-in{position:absolute;inset:22px;border-radius:100px;overflow:hidden;background:#f4f6f6;filter:brightness(.76)}
 .phone .glass-in img{width:100%;height:100%;object-fit:cover}
 
 /* phone screens */
-.scr{position:absolute;left:0;top:0;width:161.3%;height:161.3%;transform:scale(.62);transform-origin:0 0;font-family:Inter;color:#111;background:#f5f7f7}
+.scr{position:absolute;left:0;top:0;width:200%;height:200%;transform:scale(.5);transform-origin:0 0;font-family:Inter;color:#111;background:#fbfbfb}
 .scr .sb{display:flex;justify-content:space-between;align-items:center;padding:30px 70px 0;font-weight:600;font-size:34px}
 .scr .isl{width:250px;height:72px;border-radius:40px;background:#000}
 .scr .nav{display:flex;justify-content:space-between;align-items:center;padding:40px 60px 20px;font-size:62px}
 .scr .nav b{font-weight:700}
 .scr .hero{margin:20px 50px;height:460px;border-radius:48px;padding:50px;display:flex;flex-direction:column;justify-content:space-between}
-.scr .hero.cafe{background:linear-gradient(140deg,#e9d6bf,#c99a6b)}
-.scr .hero.clinic{background:linear-gradient(140deg,#cfe8f7,#6aa9dc)}
+.scr .hero.cafe{background:#eceef0}
+.scr .hero.clinic{background:#eceef0}
 .scr .ht{font-size:70px;font-weight:700;line-height:1.05}
-.scr .btn{align-self:flex-start;background:#005ff6;color:#fff;font-size:38px;font-weight:600;padding:22px 40px;border-radius:40px}
+.scr .btn{align-self:flex-start;background:#1c1c1e;color:#fff;font-size:38px;font-weight:600;padding:22px 40px;border-radius:40px}
 .scr .sec{font-size:40px;font-weight:700;padding:44px 60px 14px;color:#333}
 .scr .li{display:flex;align-items:center;gap:30px;font-size:42px;padding:26px 60px;border-bottom:2px solid #e2e6e8}
 .scr .li em{margin-left:auto;font-style:normal;color:#888;font-size:34px}
@@ -134,7 +134,7 @@ canvas#glow{position:absolute;inset:0}
   </div></div>
 
   <!-- 4: invite -->
-  <div class="layer" id="s3"><div class="line" id="invite" style="font-size:64px;font-weight:400"><span class="w" id="iA">Message</span> <span class="w" id="iB">Us</span></div></div>
+  <div class="layer" id="s3"><div class="line" id="invite" style="font-size:64px;font-weight:400"><span class="w" id="iA">Just</span> <span class="w" id="iB">Ask</span></div></div>
 
   <!-- 5: tunnel -->
   <div id="tunnelWrap"><div id="tunnel">
@@ -143,7 +143,7 @@ canvas#glow{position:absolute;inset:0}
     <div class="wall" id="wR"><div class="phone" id="phR"><div class="glass-in" data-screen="clinic"></div></div></div>
     <div class="wall" id="wB"><div class="phone" id="phB"><div class="glass-in" data-screen="calendar"></div></div></div>
   </div></div>
-  <div class="layer" id="s4"><div class="line" id="payA" style="font-size:44px">Message Us</div><div class="line" id="payB" style="font-size:60px"><span class="w">Watch</span> <span class="w">It</span> <span class="w">Grow</span></div></div>
+  <div class="layer" id="s4"><div class="line" id="payA" style="font-size:44px">Just Ask</div><div class="line" id="payB" style="font-size:60px"><span class="w">Watch</span> <span class="w">It</span> <span class="w">Grow</span></div></div>
   <div id="whipWrap"><div id="whip"><div class="phone" id="phW"><div class="glass-in" data-screen="calendar"></div></div></div></div>
 
   <!-- 6: bar -->

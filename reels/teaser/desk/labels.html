@@ -8,7 +8,7 @@ html,body{width:1080px;height:1920px;background:transparent;overflow:hidden}
  font-family:BC;font-weight:700;color:#fafafb;text-transform:uppercase;letter-spacing:0}
 .b1{top:262.5px;height:99px;font-size:62px;padding:0 25px 0 21px;gap:18px}
 .b2{top:376.5px;height:78px;font-size:49px;padding:0 22px 0 18px;gap:16px}
-.acc{color:#2f7dff}
+.acc{color:#d57c58}
 svg{flex:none}
 </style></head><body>
 <div class="box b1" id="b1"><svg width="64" height="64" viewBox="-32 -32 64 64"><g id="spark1"></g></svg><span><span class="acc">CYWEB</span> BUILT THIS</span></div>
@@ -17,5 +17,5 @@ svg{flex:none}
 // 12-ray spark, rebuilt as a vector
 for (const id of ['spark1','spark2']) { let p=''; for (let i=0;i<12;i++){ const a=i*Math.PI/6+(i%2?0.12:0), r=i%2?27:31, w=0.11;
   p+=`M${(Math.cos(a-w)*6).toFixed(2)} ${(Math.sin(a-w)*6).toFixed(2)} L${(Math.cos(a)*r).toFixed(2)} ${(Math.sin(a)*r).toFixed(2)} L${(Math.cos(a+w)*6).toFixed(2)} ${(Math.sin(a+w)*6).toFixed(2)} Z `; }
-  document.getElementById(id).innerHTML=`<circle r="8" fill="#2f7dff"/><path d="${p}" fill="#2f7dff" stroke="#2f7dff" stroke-width="2.4" stroke-linejoin="round"/>`; }
+  document.getElementById(id).innerHTML=`<circle r="8" fill="#d57c58"/><path d="${p}" fill="#d57c58" stroke="#d57c58" stroke-width="2.4" stroke-linejoin="round"/>`; }
 </script></body></html>

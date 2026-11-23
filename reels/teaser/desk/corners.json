@@ -1,22 +1,22 @@
 {
- "plate": "desk/plate.png",
+ "plate": "desk/set_graded.png",
  "corners": [
   [
-   53.7,
-   556.4
+   54.3,
+   555.9
   ],
   [
-   1055.4,
-   649.8
+   1055.0,
+   650.2
   ],
   [
-   1044.5,
-   1188.6
+   1044.8,
+   1188.1
   ],
   [
-   49.5,
-   1244.0
+   49.0,
+   1244.6
   ]
  ],
- "note": "STAND-IN plate. Corners = reference corners x1.5 (SHOT.md). Replace via tools/fit_desk.py when assets/desk.* exists."
+ "note": "3D-rebuilt set (desk/set3d.html), camera solved from the reference corners (desk/camera_solve.json). Replace via tools/fit_desk.py when your own desk shot is in assets/."
 }

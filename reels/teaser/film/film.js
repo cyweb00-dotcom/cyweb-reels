@@ -133,8 +133,8 @@ tl.to(cur, { x: X(690), y: X(432), duration: F(85) - F(79), ease: 'power1.out' }
 const pw = $('panelWrap'), panel = $('panel'), pIcon = $('pIcon');
 // fitted: centre (957.9,454.7) W1312.6 H729.4 rotateX 32.0 rotateY 0.24, perspective 1920
 gsap.set(panel, { left: 957.9 - 656.3, top: 454.7 - 364.7, width: 1312.6, height: 729.4, rotationX: 50, rotationY: 0.24, y: -700, scale: 1.0, transformOrigin: '50% 50%' });
-tl.to(pw, { opacity: 1, duration: F(78) - F(74), ease: 'power1.out' }, F(74));
-track(panel, 'y', [[74, -800], [77, -520], [79, -260], [81, -170], [83, -120], [85, -90], [89, -20], [95, 0]]);
+tl.to(pw, { opacity: 1, duration: F(77) - F(72), ease: 'power1.out' }, F(72));
+track(panel, 'y', [[72, -900], [74, -800], [77, -520], [79, -260], [81, -170], [83, -120], [85, -90], [89, -20], [95, 0]]);
 track(panel, 'scale', [[74, 1.25], [79, 1.15], [85, 1.1], [89, 1.03], [95, 1]]);
 track(panel, 'rotationX', [[74, 50], [79, 44], [85, 35], [89, 32]]);
 gsap.set(pIcon, { opacity: 0 }); tl.to(pIcon, { opacity: 1, duration: F(91) - F(87) }, F(87));
@@ -216,7 +216,7 @@ gsap.set(whip, { transformOrigin: '0px 0px' });
 gsap.set(whip, { x: 960, y: 830, rotation: 0, rotationX: 72, scale: .5, opacity: 0 });
 tl.set(whip, { opacity: 1 }, F(207));
 // island (top-edge centre) path in film px, rotation, tilt, scale — read off ref f209–243
-const WK = [[207, 960, 830, 0, 72, .5], [209, 960, 810, 0, 70, .5], [211, 967, 705, 5, 55, .55], [213, 975, 640, 14, 40, .7], [215, 971, 620, 40, 25, 1.0], [217, 960, 660, 55, 15, 1.3], [219, 930, 700, 63, 9, 1.5], [221, 906, 745, 70, 5, 1.7], [225, 860, 790, 71, 2, 1.85], [229, 904, 800, 72, 0, 1.9], [233, 820, 700, 76, 0, 1.9], [237, 720, 561, 80, 0, 1.9], [240, 540, 580, 83, 0, 1.9], [243, -200, 580, 90, 0, 1.9]];
+const WK = [[207, 960, 830, 0, 72, .5], [209, 960, 810, 0, 70, .5], [211, 967, 705, 5, 55, .55], [213, 975, 640, 14, 40, .7], [215, 971, 620, 40, 25, 1.2], [217, 960, 660, 55, 15, 1.5], [219, 930, 700, 63, 9, 1.65], [221, 906, 745, 70, 5, 1.7], [225, 860, 790, 71, 2, 1.85], [229, 904, 800, 72, 0, 1.9], [233, 820, 700, 76, 0, 1.9], [237, 720, 561, 80, 0, 1.9], [240, 540, 580, 83, 0, 1.9], [243, -200, 580, 90, 0, 1.9]];
 for (let i = 1; i < WK.length; i++) {
   const [f0] = WK[i - 1], [f1, x, y, r, rx, s] = WK[i];
   tl.to(whip, { x, y, rotation: r, rotationX: rx, scale: s, duration: (f1 - f0) / FPS, ease: 'none' }, F(f0));
