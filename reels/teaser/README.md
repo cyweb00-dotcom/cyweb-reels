@@ -25,8 +25,8 @@ A keynote-style screen film on a monitor in a desk shot, built in code and rende
 | Invite (2 words) | Just Ask | Get Found |
 | Payoff (3 words) | See The Magic | Get More Bookings |
 | Closing (2 + 1 words) | Pro Workflow / Unleashed | Your Business / Online |
-| Label 1 (hook) | OPUS 5.5 COOKED | CUSTOMERS CAN'T FIND YOU? (accent: reference orange #D57C58) |
-| Label 2 | COMMENT "CLAUDE" FOR FULL GUIDE | COMMENT "WEBSITE" TO GET YOURS |
+| Label 1 (hook) | OPUS 5.5 COOKED | OWN A LOCAL BUSINESS? (accent: CYWEB blue #2EA6FF) |
+| Label 2 (comment ask) | COMMENT "CLAUDE" FOR FULL GUIDE | COMMENT YOUR BUSINESS NAME |
 
 ## Stand-ins still in use
 - **Desk shot (own angle)**: a 3D room built in code (`desk/room.html`): light-oak slatted wall, wall-mounted 27" monitor with light bar, orange ball lamp, slim aluminium keyboard (low-profile keys with legends), white mouse on an aluminium base, grey felt desk mat, ceramic mug, snake plant in a matte pot, walnut desk; soft daylight from the left plus warm practicals. Camera sits front-right and higher than the reference, the monitor is turned toward it (its right edge is the tall one; in the reference it's the left).
@@ -46,8 +46,7 @@ python3 tools/audio.py && ffmpeg -i out/audio.wav -af loudnorm=I=-14:TP=-1 out/a
 ```
 
 ## Caption
-Customers can't find you? Let's fix that.
+Own a local business? Comment your business name and we'll show you what your website could look like.
 CYWEB builds websites for local businesses in Cyprus, with online bookings, WhatsApp, Google Maps, and photos and videos that show you at your best.
-Comment "WEBSITE" and we'll show you how yours could look.
 cywebdev.com
 CYWEB team
