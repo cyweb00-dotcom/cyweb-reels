@@ -44,3 +44,7 @@ The reference room was only a match target; this round the shot moves to its own
 16. Panel rebuilt as "what we do": Websites, Photos, Videos, Bookings, WhatsApp, Google Maps, Your business, cywebdev.com, Local businesses (type ~2x larger so it reads on a phone).
 17. Phone screens rebuilt as real-looking CYWEB-style sites (café, salon, clinic, booking calendar) with the features CYWEB sells: booking, WhatsApp button, Google stars, map, call button.
 18. Payoff line "Get More Bookings"; end card = full CYWEB logo with its tagline.
+
+### Round 5: modern, calm workspace
+19. Keyboard: slim space-grey aluminium case, low-profile caps with legends (was a chunky walnut board). Mouse: glossy white shell on an aluminium base.
+20. Desk: grey felt desk mat, ceramic mug with coffee, snake plant in a matte pot; lighter oak slats; soft daylight from the left with warm lamp. Camera and monitor unchanged, so the screen corners and the film timing are identical.
