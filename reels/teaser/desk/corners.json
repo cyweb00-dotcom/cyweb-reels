@@ -1,22 +1,22 @@
 {
- "plate": "desk/set_graded.png",
+ "plate": "desk/room/base.png",
  "corners": [
   [
-   54.3,
-   555.9
+   117.0,
+   598.4
   ],
   [
-   1055.0,
-   650.2
+   918.4,
+   603.4
   ],
   [
-   1044.8,
-   1188.1
+   894.5,
+   1051.2
   ],
   [
-   49.0,
-   1244.6
+   142.3,
+   1022.9
   ]
  ],
- "note": "3D-rebuilt set (desk/set3d.html), camera solved from the reference corners (desk/camera_solve.json). Replace via tools/fit_desk.py when your own desk shot is in assets/."
+ "note": "Own camera angle: 3D room desk/room.html, screen corners projected from the 3D monitor."
 }

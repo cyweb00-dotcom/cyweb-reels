@@ -17,13 +17,15 @@ A keynote-style screen film on a monitor in a desk shot, built in code and rende
 | Label 2 | COMMENT "CLAUDE" FOR FULL GUIDE | COMMENT "WEBSITE" TO GET YOURS |
 
 ## Stand-ins still in use
-- **Desk shot**: the room is rebuilt in 3D to match the reference (`desk/set3d.html`: slatted wall, light bar, orange ball lamp, wooden keyboard, wood desk). The camera is solved from the 4 screen corners (`desk/camera_solve.json`, 0.6 px error); lamp and keyboard are placed from their reference pixel positions; the plate is colour-graded to the reference (`tools/grade_plate.py`). To use your own desk instead: `python3 tools/fit_desk.py assets/desk.jpg` (or `.mp4`) → check `desk/corners_marked.png` → re-run the composite.
+- **Desk shot (own angle)**: a 3D room built in code (`desk/room.html`): slatted wood wall, wall-mounted 27" monitor with light bar, orange ball lamp, walnut keyboard with legends, mouse, wood desk. Camera sits front-right and higher than the reference, the monitor is turned toward it (its right edge is the tall one; in the reference it's the left).
+  Rendered as linear light passes: `base` (room lights + glass reflections), `light0..5` (room lit only by one sixth of the screen), `depth`. `tools/composite_room.py` relights the room every frame from the screen's own colours, pins the film with getPerspectiveTransform/warpPerspective, adds the glass reflection, bloom, depth of field (focus on the screen), ACES tone mapping, vignette, slight chromatic aberration and grain, then the labels.
+  Your own desk shot can still replace it: `python3 tools/fit_desk.py assets/desk.jpg`, then `tools/composite.py`.
 - **Phone screenshots**: 4 website screens built in `film/screens.js`. Drop `assets/screens/1.png … 4.png` (left, top, right, bottom/whip) and re-render.
 
 ## Rebuild
 ```
-python3 -m http.server 8765 &            # the 3D set loads three.js over http
-node tools/render_set.js && python3 tools/grade_plate.py
+python3 -m http.server 8765 &            # the 3D room loads three.js over http
+node tools/render_room.js                 # base, depth, 6 screen-light passes + corners
 npm i                                     # gsap + fonts
 python3 tools/glowfit.py                  # glow track from the reference (needs ref/flat)
 node tools/render_film.js 0 359 5 | python3 tools/avg.py film/out    # screen film, sub-frame motion blur

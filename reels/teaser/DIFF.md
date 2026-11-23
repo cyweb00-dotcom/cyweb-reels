@@ -32,3 +32,10 @@ Numbers: `out/diff_metrics.json`. Visual: `out/side_by_side_screen.mp4`, `out/si
 9. **Invite line**: "Just Ask", as in your brief and the reference.
 10. **Phone screens** were brighter than the reference camera captured them (measured phone white ≈ 176,189,191) → white iOS-style screens at 76% brightness: tunnel diff 55.7 → 38.4, whip 30.8 → 24.6.
 11. Tried a lighter frosted panel glass: diff got worse (18.8 → 21.4), reverted.
+
+### Round 3: own camera angle, more realism
+The reference room was only a match target; this round the shot moves to its own angle (front-right, higher, monitor turned the other way), so whole-frame numbers against the reference no longer apply. The screen film is unchanged (same beat-by-beat match as round 2).
+12. **Light**: the room is relit every frame by the screen itself (6 screen-cell light passes, linear light), so teal scenes wash the desk and keyboard teal and the white phone tunnel lights them white.
+13. **Glass**: the screen keeps the room's reflection from the base pass on top of the picture; slight off-axis contrast loss.
+14. **Lens**: bloom on the lamp, light strip and bright screen, depth of field from the depth pass (keyboard and mouse slightly soft, screen sharp), ACES tone mapping, vignette, chromatic aberration, grain.
+15. **Labels**: same boxes; 85.6 px clear of the light bar (projected from 3D), 144 px clear of the screen.
