@@ -16,7 +16,7 @@ mask = cv2.resize(big.astype(np.float32) / 255, (W, H), interpolation=cv2.INTER_
 lab = cv2.imread('desk/labels.png', cv2.IMREAD_UNCHANGED).astype(np.float32)
 L1 = lab.copy(); L1[372:] = 0                      # label 1 (hook) rows 263-361
 L2 = lab.copy(); L2[:372] = 0                      # label 2 (CTA) rows 377-454
-CAPS = json.load(open('desk/captions.json')); CAPIMG = [cv2.imread(f'desk/captions/{i}.png', cv2.IMREAD_UNCHANGED).astype(np.float32) for i in range(len(CAPS))]
+CAPS = json.load(open('desk/captions.json')); CAPIMG = [cv2.imread(f'desk/captions/{i}.png', cv2.IMREAD_UNCHANGED).astype(np.float32) for i in range(len(CAPS))]   # captions off: desk/captions.json = [] (old list kept in captions_off.json)
 CAP_Y = 1290                                       # caption centre: between the monitor and the keyboard
 def ease(t): t = min(1, max(0, t)); return 1 - (1 - t) ** 3
 def place(layer, scale, dy, blur, alpha, cx, cy):

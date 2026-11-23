@@ -2,7 +2,8 @@
 # plus the hook (label slam f1, CTA tick f7) and a soft pop on each caption change.
 # Layers: warm 92 bpm bed (keys, sub, kick, shaker, sidechain), whooshes, clicks, riser + ticks, cinematic hits.
 import numpy as np, scipy.io.wavfile as wf, scipy.signal as ss, json
-SR = 48000; DUR = 12.0; N = int(SR * DUR); rng = np.random.default_rng(5)
+SR = 48000; DUR = 13.0;   # 12 s film + 1 s end-card hold for the spoken call to action
+N = int(SR * DUR); rng = np.random.default_rng(5)
 T = lambda f: (f - 1) / 30.0
 L = np.zeros(N); R = np.zeros(N); duck = np.ones(N)
 def put(sig, t, g=1.0, pan=0.0, st=None):
@@ -97,7 +98,7 @@ pump = np.ones(N)
 for b in np.arange(0, DUR, beat):
   i = int(b * SR); n = int(beat * SR); j = min(N, i + n); pump[i:j] *= 1 - .35 * np.exp(-np.arange(j - i) / (.12 * SR))
 bed = (verb(keys_f * .07, 2.4, .35)[:N] + lp(bass, 220) * .16) * pump + kick * .9 + hat
-bed *= np.clip(k / .25, 0, 1) * np.clip((11.98 - k) / .5, 0, 1)
+bed *= np.clip(k / .25, 0, 1) * np.clip((12.98 - k) / .6, 0, 1)
 # ---------------- cue sheet (reference onset frame -> cue) ----------------
 CUES = [('hit-hook', 1.0), ('tick', 7.0), ('whoosh', 4.0), ('pop', 34.5), ('whoosh', 72.5), ('click', 107.5), ('whoosh', 121.5),
         ('pop', 125.5), ('pop', 128.5), ('whoosh', 138.0), ('whoosh', 158.0), ('whoosh', 181.0), ('pop', 185.5), ('whoosh', 211.5),
@@ -121,7 +122,29 @@ for kind, f in CUES:
   elif kind == 'hit-big': hit(t, 1.1)
   elif kind == 'hit-hook': hit(t + 0.005, .9)
 L += bed * duck; R += bed * duck
+# ---------------- voiceover (ElevenLabs take, split at its pauses, each phrase on its beat) ----------------
+import os
+VO = []
+if os.path.exists('assets/voice/vo_take1.wav'):
+  vsr, vx = wf.read('assets/voice/vo_take1.wav'); vx = vx.astype(np.float32) / 32768
+  segs = json.load(open('assets/voice/segments.json'))
+  # phrase -> start time (s): (segment indices, start)
+  PLACE = [([0], 0.02), ([1], 1.15), ([2], 4.50), ([3], 6.07), ([4, 5], 9.67), ([6], 11.35)]
+  voice = np.zeros(N)
+  for idx, t0 in PLACE:
+    a0 = max(0, int((segs[idx[0]][0] - .04) * vsr)); a1 = min(len(vx), int((segs[idx[-1]][1] + .12) * vsr))
+    ph = vx[a0:a1].copy(); fade = int(.01 * vsr); ph[:fade] *= np.linspace(0, 1, fade); ph[-fade * 4:] *= np.linspace(1, 0, fade * 4)
+    i0 = int(t0 * SR); i1 = min(N, i0 + len(ph)); voice[i0:i1] += ph[:i1 - i0]; VO.append((t0, round(len(ph) / vsr, 2)))
+  voice = hp(voice, 90)
+  # gentle compression so every word sits up front
+  env = np.abs(voice); env = ss.sosfiltfilt(sos('low', 30), env); g = np.where(env > .12, (.12 + (env - .12) * .4) / np.maximum(env, 1e-6), 1.0)
+  voice = voice * g; voice = verb(voice, .5, .06)[:N]; voice /= np.abs(voice).max() + 1e-9
+  # duck music + effects under the voice (~ -9 dB)
+  venv = ss.sosfiltfilt(sos('low', 6), np.abs(voice)); dk = 1 - .65 * np.clip(venv / .08, 0, 1)
+  L *= dk; R *= dk
+  base = max(np.abs(L).max(), np.abs(R).max())
+  L += voice * base * 1.05; R += voice * base * 1.05
 mix = np.stack([L, R], 1); mix /= np.abs(mix).max() / 0.89
 wf.write('out/audio.wav', SR, (mix * 32767).astype(np.int16))
-json.dump(sorted(CUES, key=lambda c: c[1]), open('out/cues.json', 'w'))
+json.dump({'cues': sorted(CUES, key=lambda c: c[1]), 'voice': VO}, open('out/cues.json', 'w'))
 print('ok', len(CUES), 'cues')
