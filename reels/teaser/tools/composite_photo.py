@@ -30,7 +30,10 @@ def frame(k):
   out = plate * (1 - mask) + mask * np.clip(scr + sheen, 0, 255)
   # screen light: bloom over the bezel + soft spill on wall and desk, in the screen's colour
   lit = scr * mask
-  glow = cv2.GaussianBlur(lit, (0, 0), 18) * .22 + cv2.GaussianBlur(lit, (0, 0), 70) * .20 + cv2.GaussianBlur(lit, (0, 0), 220) * (.10 + .25 * below)
+  def soft(img, sigma, d):   # wide blurs at reduced resolution (same look, far faster)
+    sm = cv2.resize(img, (W // d, H // d), interpolation=cv2.INTER_AREA)
+    return cv2.resize(cv2.GaussianBlur(sm, (0, 0), sigma / d), (W, H), interpolation=cv2.INTER_LINEAR)
+  glow = soft(lit, 18, 2) * .22 + soft(lit, 70, 4) * .20 + soft(lit, 220, 8) * (.10 + .25 * below)
   out = 255 - (255 - out) * (1 - np.clip(glow / 255, 0, 1) * (1 - mask * .85))   # screen-blend
   g = np.random.default_rng(k).normal(0, 1, (H, W)).astype(np.float32); g = cv2.GaussianBlur(g, (0, 0), .6) * 1.8
   out = out + g[..., None]
