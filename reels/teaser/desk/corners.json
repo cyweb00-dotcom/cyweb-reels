@@ -1,0 +1,22 @@
+{
+ "plate": "desk/plate.png",
+ "corners": [
+  [
+   53.7,
+   556.4
+  ],
+  [
+   1055.4,
+   649.8
+  ],
+  [
+   1044.5,
+   1188.6
+  ],
+  [
+   49.5,
+   1244.0
+  ]
+ ],
+ "note": "STAND-IN plate. Corners = reference corners x1.5 (SHOT.md). Replace via tools/fit_desk.py when assets/desk.* exists."
+}

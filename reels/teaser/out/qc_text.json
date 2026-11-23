@@ -1,0 +1,33 @@
+{
+ "clearance": {
+  "title": {
+   "min": 272,
+   "frame": 45
+  },
+  "invite": {
+   "min": 363,
+   "frame": 126
+  },
+  "payoff": {
+   "min": 509,
+   "frame": 202
+  },
+  "percent": {
+   "min": 133,
+   "frame": 242
+  },
+  "closing": {
+   "min": 506,
+   "frame": 328
+  },
+  "logo": {
+   "min": 442,
+   "frame": 329
+  },
+  "logoEnd": {
+   "min": 470,
+   "frame": 349
+  }
+ },
+ "framesWithTwoLines": {}
+}

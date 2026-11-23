@@ -1,0 +1,46 @@
+{
+ "title": {
+  "mean_abs_diff": 13.9,
+  "glow_centroid_err_px": 26.0
+ },
+ "icon": {
+  "mean_abs_diff": 8.0,
+  "glow_centroid_err_px": 19.0
+ },
+ "push-in": {
+  "mean_abs_diff": 16.7,
+  "glow_centroid_err_px": 30.0
+ },
+ "panel": {
+  "mean_abs_diff": 18.8,
+  "glow_centroid_err_px": 21.0
+ },
+ "invite": {
+  "mean_abs_diff": 10.3,
+  "glow_centroid_err_px": 24.0
+ },
+ "tunnel": {
+  "mean_abs_diff": 52.7,
+  "glow_centroid_err_px": 101.0
+ },
+ "whip": {
+  "mean_abs_diff": 29.0,
+  "glow_centroid_err_px": 59.0
+ },
+ "bar": {
+  "mean_abs_diff": 16.1,
+  "glow_centroid_err_px": 21.0
+ },
+ "closing": {
+  "mean_abs_diff": 6.2,
+  "glow_centroid_err_px": 28.0
+ },
+ "logo": {
+  "mean_abs_diff": 12.2,
+  "glow_centroid_err_px": 117.0
+ },
+ "end": {
+  "mean_abs_diff": 15.4,
+  "glow_centroid_err_px": 215.0
+ }
+}
