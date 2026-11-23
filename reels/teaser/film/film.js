@@ -304,6 +304,8 @@ blurKeys([logo], [[1, 10], [329, 10], [330, 4], [331, 1], [332, 0]]);
 tl.to(white, { opacity: 1, duration: F(349) - F(347), ease: 'power2.in' }, F(347));
 gsap.set(logoEnd, { width: 470, height: 470 * 934 / 1172, xPercent: -50, yPercent: -50, x: X(637), y: X(361), opacity: 0 });   // full logo + tagline
 tl.set(logoEnd, { opacity: 1 }, F(349));
+const url = $('url'); gsap.set(url, { xPercent: -50, x: X(637), y: X(361) + 230, opacity: 0, filter: 'blur(10px)' });
+tl.to(url, { opacity: 1, filter: 'blur(0px)', duration: F(354) - F(349), ease: 'expo.out' }, F(349));   // end card: where to go
 tl.set(logo, { opacity: 0 }, F(349));
 
 // ---------- seek API for the renderer ----------

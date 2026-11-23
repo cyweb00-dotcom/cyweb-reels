@@ -48,3 +48,6 @@ The reference room was only a match target; this round the shot moves to its own
 ### Round 5: modern, calm workspace
 19. Keyboard: slim space-grey aluminium case, low-profile caps with legends (was a chunky walnut board). Mouse: glossy white shell on an aluminium base.
 20. Desk: grey felt desk mat, ceramic mug with coffee, snake plant in a matte pot; lighter oak slats; soft daylight from the left with warm lamp. Camera and monitor unchanged, so the screen corners and the film timing are identical.
+
+### Round 6: ad copy
+21. Hook label "CUSTOMERS CAN'T FIND YOU?" (problem first) replaces "CYWEB BUILT THIS"; invite "Get Found" replaces "Just Ask"; end card adds cywebdev.com. Story: problem → CYWEB websites → what we do → Get Found → real sites → Get More Bookings → Your Business Online → cywebdev.com.
