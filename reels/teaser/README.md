@@ -3,7 +3,7 @@
 A keynote-style screen film on a monitor in a desk shot, built in code and rendered frame by frame. Timing, layout, motion and sound hits follow `ref/reference.mp4` (measured, see SHOT.md / REF.md / DIFF.md). Every graphic is rebuilt; nothing is cut out of the reference.
 
 - `out/final.mp4` — the reel (high quality) · `out/final_small.mp4` — light export for posting (~2.7 MB)
-- Captions (`desk/captions.json`), hook labels animate in over the first second, sound rebuilt in `tools/audio.py`
+- No captions under the monitor (the lines on the screen carry the text); voiceover (ElevenLabs, 'Tom - British Ad Man', `assets/voice/`) placed on the beats in `tools/audio.py`; hook labels animate in over the first second; 13 s (end card held 1 s for the spoken call to action)
 - `out/stills/` — one desk still per scene + `_sheet_ref_vs_mine.png`
 - `out/qc.json`, `out/qc_text.json`, `out/diff_metrics.json` — checks
 
