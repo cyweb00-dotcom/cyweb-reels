@@ -1,6 +1,11 @@
 #!/bin/bash
 # composite every frame, encode final.mp4, side-by-sides, QC
 set -e
+# ---- AI Office status (content agent). Never blocks the render: a failed update is only logged. ----
+REEL="${REEL_NAME:-Reel: own a local business (13 s)}"
+office() { python3 tools/office_status.py set "Social Media" "$1" "$2" >/dev/null 2>&1 || echo "office status not updated: $1" >&2; }
+office "$REEL: making" Running
+trap 'office "$REEL: render failed, see log" "Waiting for you"' ERR
 mkdir -p out/desk
 # (composite already up to date when called with SKIP_COMP=1)
 [ -z "$SKIP_COMP" ] && { for r in "0 89" "90 179" "180 269" "270 359"; do set -- $r; python3 tools/${COMPOSITOR:-composite_photo}.py $1 $2 & done; wait; }
@@ -10,3 +15,4 @@ ffmpeg -v error -y -i ref/reference.mp4 -i out/final.mp4 -filter_complex "[0:v]s
 # flat screen films: reference unwarped left, mine right
 ffmpeg -v error -y -framerate 30 -i ref/flat/%04d.png -framerate 30 -i film/out/%04d.png -filter_complex "[0:v]scale=960:540[a];[1:v]scale=960:540[b];[a][b]hstack=inputs=2[v]" -map "[v]" -c:v libx264 -crf 18 -pix_fmt yuv420p out/side_by_side_screen.mp4
 python3 tools/qc.py
+office "$REEL: ready, waiting for your OK to post" "Waiting for you"
