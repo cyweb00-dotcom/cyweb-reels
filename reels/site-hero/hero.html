@@ -1,0 +1,103 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<!-- CYWEB website hero: 8 s seamless loop, 1920x1080, no text. A black glass monitor floats in a dark studio.
+     Everything is a pure function of t (0..8 s) with period T, so frame 240 == frame 0. -->
+<style>html,body{margin:0;background:#000;overflow:hidden}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body>
+<script type="module">
+import * as THREE from 'three';
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
+const W = 1920, H = 1080, T = 8, TAU = Math.PI * 2;
+const r = new THREE.WebGLRenderer({ antialias: true, preserveDrawingBuffer: true });
+r.setSize(W, H); r.setPixelRatio(1); r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.05; r.outputColorSpace = THREE.SRGBColorSpace;
+document.body.appendChild(r.domElement);
+const scene = new THREE.Scene(); scene.background = new THREE.Color(0x02030a); scene.fog = new THREE.FogExp2(0x02040c, 0.07);
+const cam = new THREE.PerspectiveCamera(32, W / H, 0.1, 50);
+
+// ---- dashboard texture (animated, periodic) ----
+const SC = document.createElement('canvas'); SC.width = 1920; SC.height = 800; const sx = SC.getContext('2d');
+const stex = new THREE.CanvasTexture(SC); stex.colorSpace = THREE.SRGBColorSpace; stex.anisotropy = 8;
+function rr(x, y, w, h, rad) { sx.beginPath(); sx.roundRect(x, y, w, h, rad); }
+function drawScreen(t) {
+  const ph = TAU * t / T;
+  sx.fillStyle = '#050a1c'; sx.fillRect(0, 0, 1920, 800);
+  let g = sx.createRadialGradient(1400 + 120 * Math.sin(ph), 180, 0, 1400, 180, 1100); g.addColorStop(0, 'rgba(47,125,255,.55)'); g.addColorStop(1, 'rgba(47,125,255,0)'); sx.fillStyle = g; sx.fillRect(0, 0, 1920, 800);
+  // sidebar
+  sx.fillStyle = 'rgba(255,255,255,.05)'; rr(40, 40, 230, 720, 28); sx.fill();
+  for (let i = 0; i < 6; i++) { sx.fillStyle = i === 1 ? 'rgba(47,125,255,.9)' : 'rgba(255,255,255,.16)'; rr(70, 90 + i * 84, 170, 40, 20); sx.fill(); }
+  // stat cards
+  for (let i = 0; i < 3; i++) {
+    const x = 310 + i * 410, p = 0.5 + 0.5 * Math.sin(ph + i * 1.7);
+    sx.fillStyle = 'rgba(255,255,255,.07)'; sx.strokeStyle = 'rgba(160,200,255,.35)'; sx.lineWidth = 2; rr(x, 40, 380, 190, 28); sx.fill(); sx.stroke();
+    sx.fillStyle = 'rgba(255,255,255,.55)'; rr(x + 30, 72, 120, 16, 8); sx.fill();
+    sx.fillStyle = '#eaf2ff'; rr(x + 30, 112, 150 + 80 * p, 44, 12); sx.fill();
+    sx.fillStyle = 'rgba(47,125,255,.95)'; rr(x + 30, 178, 70 + 60 * p, 14, 7); sx.fill();
+  }
+  // big chart card
+  sx.fillStyle = 'rgba(255,255,255,.06)'; sx.strokeStyle = 'rgba(160,200,255,.3)'; rr(310, 270, 1240, 490, 32); sx.fill(); sx.stroke();
+  for (let i = 0; i < 5; i++) { sx.strokeStyle = 'rgba(255,255,255,.07)'; sx.beginPath(); sx.moveTo(350, 330 + i * 90); sx.lineTo(1510, 330 + i * 90); sx.stroke(); }
+  const pts = []; for (let i = 0; i <= 60; i++) { const u = i / 60, y = 690 - (330 * (0.08 + 0.92 * Math.pow(u, 1.5))) - 26 * Math.sin(u * 9 + ph) - 14 * Math.sin(u * 17 - 2 * ph); pts.push([350 + u * 1160, y]); }
+  const fg = sx.createLinearGradient(0, 330, 0, 700); fg.addColorStop(0, 'rgba(47,125,255,.45)'); fg.addColorStop(1, 'rgba(47,125,255,0)');
+  sx.fillStyle = fg; sx.beginPath(); sx.moveTo(350, 700); pts.forEach(p => sx.lineTo(p[0], p[1])); sx.lineTo(1510, 700); sx.closePath(); sx.fill();
+  sx.lineWidth = 8; sx.lineJoin = 'round'; sx.strokeStyle = '#6fb0ff'; sx.shadowColor = '#2f7dff'; sx.shadowBlur = 24; sx.beginPath(); pts.forEach((p, i) => i ? sx.lineTo(p[0], p[1]) : sx.moveTo(p[0], p[1])); sx.stroke(); sx.shadowBlur = 0;
+  const hp = Math.floor(((t / T) * 2 % 1) * 60), hpP = pts[Math.min(60, hp)]; sx.fillStyle = '#fff'; sx.beginPath(); sx.arc(hpP[0], hpP[1], 11, 0, 7); sx.fill();
+  // ring card
+  sx.fillStyle = 'rgba(255,255,255,.07)'; sx.strokeStyle = 'rgba(160,200,255,.3)'; sx.lineWidth = 2; rr(1590, 270, 290, 490, 32); sx.fill(); sx.stroke();
+  const prog = 0.62 + 0.18 * Math.sin(ph); sx.lineWidth = 26; sx.lineCap = 'round';
+  sx.strokeStyle = 'rgba(255,255,255,.12)'; sx.beginPath(); sx.arc(1735, 470, 80, 0, TAU); sx.stroke();
+  sx.strokeStyle = '#2f7dff'; sx.shadowColor = '#2f7dff'; sx.shadowBlur = 20; sx.beginPath(); sx.arc(1735, 470, 80, -Math.PI / 2, -Math.PI / 2 + TAU * prog); sx.stroke(); sx.shadowBlur = 0;
+  for (let i = 0; i < 3; i++) { sx.fillStyle = 'rgba(255,255,255,.2)'; rr(1620, 610 + i * 44, 230 - 40 * i, 18, 9); sx.fill(); }
+  stex.needsUpdate = true;
+}
+
+// ---- monitor ----
+const MW = 3.2, MH = MW * 800 / 1920 * 1.0 * (1920 / 1920) , bez = 0.05;
+const MHt = MW * 800 / 1920;
+const mon = new THREE.Group();
+const body = new THREE.Mesh(new RoundedBoxGeometry(MW + bez * 2, MHt + bez * 2, 0.07, 6, 0.03), new THREE.MeshPhysicalMaterial({ color: 0x0b0d14, roughness: .3, metalness: .9, clearcoat: 1, clearcoatRoughness: .1 }));
+mon.add(body);
+const scr = new THREE.Mesh(new THREE.PlaneGeometry(MW, MHt), new THREE.MeshBasicMaterial({ map: stex, toneMapped: false }));
+scr.position.z = 0.0365; mon.add(scr);
+// glass sheen over the screen
+const sheen = new THREE.Mesh(new THREE.PlaneGeometry(MW, MHt), new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: .05, blending: THREE.AdditiveBlending, depthWrite: false }));
+sheen.position.z = 0.0372; mon.add(sheen);
+scene.add(mon);
+// reflection: mirrored copy under the floor
+const mon2 = mon.clone(true); scene.add(mon2);
+const FLOOR = -1.2;
+const floor = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.MeshStandardMaterial({ color: 0x02040a, roughness: .2, metalness: .6, transparent: true, opacity: .58 }));
+floor.rotation.x = -Math.PI / 2; floor.position.y = FLOOR; scene.add(floor);
+
+// ---- lights ----
+scene.add(new THREE.AmbientLight(0x0a1230, .6));
+const rimL = new THREE.DirectionalLight(0x3b8aff, 9); rimL.position.set(-5, 1.2, -1.5); scene.add(rimL);
+const rimR = new THREE.DirectionalLight(0x6fb0ff, 8); rimR.position.set(5, 1.6, -1.5); scene.add(rimR);
+const key = new THREE.DirectionalLight(0xdfeaff, .55); key.position.set(0, 3, 5); scene.add(key);
+const glow = new THREE.PointLight(0x2f7dff, 3.2, 8, 2); glow.position.set(0, -.2, 1.4); scene.add(glow);
+
+// ---- haze + dust (periodic motion) ----
+const gtex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'), gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(.3, 'rgba(255,255,255,.35)'); gr.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gr; g.fillRect(0, 0, 128, 128); return new THREE.CanvasTexture(c); })();
+let sd = 5; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+const dust = []; const dm = new THREE.SpriteMaterial({ map: gtex, color: 0x9cc4ff, transparent: true, opacity: .55, depthWrite: false, blending: THREE.AdditiveBlending });
+for (let i = 0; i < 260; i++) { const s = new THREE.Sprite(dm.clone()); s.userData = { x: (rnd() - .5) * 9, y: FLOOR + rnd() * 4, z: -2 + rnd() * 6, a: .1 + rnd() * .35, p: rnd() * TAU, k: 1 + Math.floor(rnd() * 2), sz: .01 + rnd() * .035 }; s.scale.setScalar(s.userData.sz); scene.add(s); dust.push(s); }
+const haze = []; const hm = new THREE.SpriteMaterial({ map: gtex, color: 0x1f5fe0, transparent: true, opacity: .16, depthWrite: false, blending: THREE.AdditiveBlending });
+for (let i = 0; i < 7; i++) { const s = new THREE.Sprite(hm.clone()); s.userData = { x: (rnd() - .5) * 6, y: FLOOR + .4 + rnd() * 2.4, z: -2.5 + rnd() * 3, p: rnd() * TAU, sz: 4 + rnd() * 4 }; s.scale.setScalar(s.userData.sz); scene.add(s); haze.push(s); }
+// back-light bloom card behind the monitor
+const back = new THREE.Sprite(new THREE.SpriteMaterial({ map: gtex, color: 0x2f7dff, transparent: true, opacity: .5, depthWrite: false, blending: THREE.AdditiveBlending })); back.position.set(0, .1, -1.2); back.scale.setScalar(7.5); scene.add(back);
+
+const pool = new THREE.Sprite(new THREE.SpriteMaterial({ map: gtex, color: 0x2f7dff, transparent: true, opacity: .55, depthWrite: false, blending: THREE.AdditiveBlending })); pool.position.set(0, FLOOR + .02, .3); pool.scale.set(7, 1.4, 1); scene.add(pool);
+window.setT = t => {
+  const ph = TAU * t / T, e = .5 - .5 * Math.cos(ph);              // 0 -> 1 -> 0 over the loop
+  drawScreen(t);
+  mon.position.set(0, .05 * Math.sin(ph), 0); mon.rotation.y = .1 * Math.sin(ph); mon.rotation.x = .02 * Math.sin(ph * 2);
+  mon2.position.set(0, 2 * FLOOR - mon.position.y, 0); mon2.rotation.set(-mon.rotation.x, mon.rotation.y, 0); mon2.scale.y = -1;
+  const dist = 5.5 - 1.3 * e, ang = .38 * Math.sin(ph - .6), yy = .02 - .06 * e;
+  cam.position.set(Math.sin(ang) * dist, yy, Math.cos(ang) * dist); cam.lookAt(0, -.42, 0);
+  glow.intensity = 3.2 + .9 * Math.sin(ph);
+  back.material.opacity = .42 + .12 * Math.sin(ph);
+  dust.forEach(s => { const u = s.userData; s.position.set(u.x + .25 * Math.sin(ph * u.k + u.p), u.y + .3 * Math.sin(ph * u.k + u.p * 2), u.z + .25 * Math.cos(ph * u.k + u.p)); s.material.opacity = .2 + u.a * (.5 + .5 * Math.sin(ph * 2 + u.p)); });
+  haze.forEach(s => { const u = s.userData; s.position.set(u.x + .5 * Math.sin(ph + u.p), u.y, u.z + .4 * Math.cos(ph + u.p)); });
+  r.render(scene, cam);
+};
+window.DONE = true;
+</script></body></html>
